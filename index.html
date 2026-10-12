@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D. Uuganbadrakh — Electronics Engineer</title>
+<meta name="description" content="D. Uuganbadrakh, electronics engineer in Ulaanbaatar: vision-guided robotics, embedded firmware, industrial control and IoT systems.">
+<meta property="og:title" content="D. Uuganbadrakh — Electronics Engineer">
+<meta property="og:description" content="Vision-guided robotics, embedded firmware, industrial control and IoT systems.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://saintbdrh.github.io/">
+<meta property="og:site_name" content="D. Uuganbadrakh">
+<meta property="og:image" content="https://saintbdrh.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="D. Uuganbadrakh, electronics engineer, beside a robot arm workcell diagram">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="D. Uuganbadrakh — Electronics Engineer">
+<meta name="twitter:description" content="Vision-guided robotics, embedded firmware, industrial control and IoT systems.">
+<meta name="twitter:image" content="https://saintbdrh.github.io/og-image.png">
+<link rel="canonical" href="https://saintbdrh.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 30'%3E%3Cg stroke='%23131A22' stroke-width='1.6' stroke-linecap='round' fill='none'%3E%3Cpath d='M2 8h5M2 15h5M2 22h5M29 8h5M29 15h5M29 22h5'/%3E%3Crect x='7' y='2.75' width='22' height='24.5' rx='2.5' fill='%23fff'/%3E%3C/g%3E%3Ctext x='18' y='19.6' text-anchor='middle' font-family='monospace' font-size='8.5' font-weight='700' fill='%23131A22'%3EDU%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#F1F2EE">
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap" rel="stylesheet">
+<style>
+/* Visual system: an engineering workbench. Light CAD canvas, crisp ink linework,
+   and four oscilloscope channel colors that code each project throughout the page. */
+:root{
+  --bg:#F1F2EE; --dot:#CBD0C8; --panel:#FFFFFF; --panel-2:#F6F7F4; --sunk:#E6E9E3;
+  --ink:#131A22; --ink-2:#46505C; --ink-3:#5D6773; --line:#D3D8D0; --line-2:#B7BEB4;
+  --ch1:#C98A00; --ch1-t:#865A00; --ch2:#0091B2; --ch2-t:#006C85; --ch3:#C1287F; --ch3-t:#9C1E66; --ch4:#22945A; --ch4-t:#187043;
+  --led:#22A65A; --shadow:0 1px 0 rgba(19,26,34,.04),0 28px 56px -36px rgba(19,26,34,.38);
+  --sans:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"Martian Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121820; --dot:#252E39; --panel:#18202A; --panel-2:#1D2631; --sunk:#141B23;
+    --ink:#E7EBEF; --ink-2:#ADB7C2; --ink-3:#8E99A6; --line:#29333F; --line-2:#3A4654;
+    --ch1:#F2B53A; --ch1-t:#F5C461; --ch2:#3CC6E6; --ch2-t:#72D6EE; --ch3:#F065B1; --ch3-t:#F58CC5; --ch4:#4FD08B; --ch4-t:#7ADCA6;
+    --led:#4FD08B; --shadow:0 1px 0 rgba(0,0,0,.3),0 28px 56px -30px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121820; --dot:#252E39; --panel:#18202A; --panel-2:#1D2631; --sunk:#141B23;
+  --ink:#E7EBEF; --ink-2:#ADB7C2; --ink-3:#8E99A6; --line:#29333F; --line-2:#3A4654;
+  --ch1:#F2B53A; --ch1-t:#F5C461; --ch2:#3CC6E6; --ch2-t:#72D6EE; --ch3:#F065B1; --ch3-t:#F58CC5; --ch4:#4FD08B; --ch4-t:#7ADCA6;
+  --led:#4FD08B; --shadow:0 1px 0 rgba(0,0,0,.3),0 28px 56px -30px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+.c1{--c:var(--ch1);--ct:var(--ch1-t)} .c2{--c:var(--ch2);--ct:var(--ch2-t)}
+.c3{--c:var(--ch3);--ct:var(--ch3-t)} .c4{--c:var(--ch4);--ct:var(--ch4-t)}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure,table{margin:0}
+ul,ol{padding:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ch2);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:8px;z-index:60;background:var(--ink);color:var(--panel);padding:8px 14px;border-radius:6px}
+.skip:focus{left:16px}
+.wrap{max-width:1240px;margin-left:auto;margin-right:auto;padding-left:28px;padding-right:28px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:8px;border:1px solid var(--line-2);
+  background:var(--panel);color:var(--ink);font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;transition:border-color .15s,background-color .15s,color .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.btn.primary:hover{background:var(--ch2-t);border-color:var(--ch2-t)}
+.btn.sm{height:34px;padding:0 12px;font-size:13.5px;border-radius:6px}
+.btn:disabled{opacity:.45;cursor:default}
+
+/* Header: a bus line with one node per section; the line fills as you scroll */
+.top{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.top-in{height:64px;display:flex;align-items:center;gap:22px}
+.chip{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.chip svg{display:block}
+.chip b{font-weight:650;font-stretch:85%;font-size:16px;white-space:nowrap}
+.bus{position:relative;flex:1;min-width:0;--fill:0px}
+.bus::before,.bus::after{content:"";position:absolute;left:0;top:50%;height:2px;margin-top:-1px;border-radius:2px}
+.bus::before{right:0;background:var(--line-2)}
+.bus::after{width:var(--fill);background:var(--ink);transition:width .12s linear}
+.bus ul{position:relative;z-index:1;display:flex;list-style:none}
+.bus li{flex:1;display:flex;justify-content:flex-end}
+.bus a{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:999px;background:var(--bg);color:var(--ink-3);font-size:14px;font-weight:500;text-decoration:none;white-space:nowrap}
+.bus a:hover{color:var(--ink)}
+.node{width:11px;height:11px;border-radius:50%;border:2px solid var(--line-2);background:var(--bg);flex:none;transition:all .2s}
+.bus a[aria-current="true"]{color:var(--ink)}
+.bus a[aria-current="true"] .node{border-color:var(--ink);background:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--ink) 14%,transparent)}
+.switch{flex:none;position:relative;width:46px;height:26px;border-radius:999px;border:1px solid var(--line-2);background:var(--panel);cursor:pointer;padding:0}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--ink);transition:transform .2s}
+.switch[aria-pressed="true"]::after{transform:translateX(20px)}
+.switch svg{position:absolute;top:6px;width:12px;height:12px;color:var(--ink-3)}
+.switch .sun{right:6px} .switch .moon{left:6px}
+
+/* Hero */
+.hero-band{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-band::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1.4px);background-size:22px 22px;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center;padding-top:56px;padding-bottom:72px}
+.status{display:inline-flex;align-items:center;gap:9px;padding:5px 13px 5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:13.5px;color:var(--ink-2)}
+.led{width:8px;height:8px;border-radius:50%;background:var(--led);box-shadow:0 0 0 3px color-mix(in srgb,var(--led) 24%,transparent)}
+.name{font-stretch:75%;font-weight:700;font-size:clamp(44px,5.6vw,84px);line-height:.95;letter-spacing:-.012em;margin:22px 0 18px}
+.role{font-size:clamp(19px,1.8vw,23px);line-height:1.35;font-weight:600;max-width:30ch}
+.lede{margin-top:14px;font-size:17px;color:var(--ink-2);max-width:48ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px;padding-top:18px;border-top:1px solid var(--line)}
+.facts dt{font-size:12.5px;color:var(--ink-3)}
+.facts dd{font-size:14px;font-weight:600;line-height:1.35;margin-top:3px}
+
+/* Workcell demo */
+.cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.cell-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line)}
+.cell-title{font-size:14px;font-weight:650}
+.cell-title span{font-weight:400;color:var(--ink-3);margin-left:8px}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);cursor:pointer;user-select:none}
+.toggle input{appearance:none;-webkit-appearance:none;margin:0;width:30px;height:18px;border-radius:999px;background:var(--line-2);position:relative;cursor:pointer;transition:background .2s}
+.toggle input::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--panel);transition:transform .2s}
+.toggle input:checked{background:var(--ch2)}
+.toggle input:checked::after{transform:translateX(12px)}
+#cell{display:block;width:100%;height:auto;cursor:crosshair;touch-action:pan-y;-webkit-user-select:none;user-select:none;background:var(--panel)}
+#cell .c-gridl{fill:none;stroke:var(--line);stroke-width:.5}
+#cell .c-tablebg{fill:var(--sunk)}
+#cell .c-hatch{stroke:var(--line-2);stroke-width:1}
+#cell .c-tabletop{stroke:var(--ink);stroke-width:1.5}
+#cell .c-reach{fill:none;stroke:var(--ink-3);stroke-width:.8;stroke-dasharray:3 4;opacity:.7}
+#cell .c-note{font-family:var(--mono);font-size:8.5px;fill:var(--ink-3)}
+#cell .c-bin{fill:none;stroke-width:3;stroke-linejoin:round;stroke:var(--c)}
+#cell .c-binfloor{fill:color-mix(in srgb,var(--c) 12%,transparent)}
+#cell .c-binlabel{font-family:var(--mono);font-size:8.5px;fill:var(--ct);text-anchor:middle}
+#cell .c-block{cursor:pointer;outline:none}
+#cell .c-block rect.body{fill:var(--c);stroke:color-mix(in srgb,var(--c) 60%,var(--ink));stroke-width:1}
+#cell .c-block .face{fill:#fff;opacity:.18}
+#cell .c-block:focus-visible rect.body{stroke:var(--ink);stroke-width:2.5}
+#cell .c-block.sorted{cursor:default}
+#cell .c-hit{fill:transparent}
+#cell .c-det{fill:none;stroke:var(--c);stroke-width:1;stroke-dasharray:4 3}
+#cell .c-detlabel{font-family:var(--mono);font-size:8px;fill:var(--ct)}
+#cell .c-cross{stroke:var(--c);stroke-width:1}
+#cell.no-det .c-detg{display:none}
+#cell .c-ped{fill:var(--panel-2);stroke:var(--ink);stroke-width:1.5}
+#cell .lo{stroke:var(--ink);stroke-linecap:round;fill:none}
+#cell .li{stroke:var(--panel-2);stroke-linecap:round;fill:none}
+#cell .c-joint{fill:var(--panel);stroke:var(--ink);stroke-width:1.5}
+#cell .c-pin{fill:var(--ink)}
+#cell .c-arc{fill:none;stroke-width:1.2}
+#cell .a1{stroke:var(--ch1)} #cell .a2{stroke:var(--ch2)} #cell .a3{stroke:var(--ch3)}
+#cell .c-alabel{font-family:var(--mono);font-size:8.5px;text-anchor:middle;dominant-baseline:middle}
+#cell .t1{fill:var(--ch1-t)} #cell .t2{fill:var(--ch2-t)} #cell .t3{fill:var(--ch3-t)}
+#cell .c-finger{fill:var(--ink)}
+#cell .c-palm{stroke:var(--ink);stroke-width:4;stroke-linecap:round}
+#cell .c-target{stroke:var(--ch2);stroke-width:1.2;fill:none;transition:opacity .2s}
+#cell .c-corner{fill:none;stroke:var(--ink-3);stroke-width:1.2}
+.telemetry{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);background:var(--panel-2)}
+.telemetry div{padding:8px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+.telemetry div:nth-child(4n){border-right:0}
+.telemetry div:nth-last-child(-n+4){border-bottom:0}
+.telemetry dt{font-size:11.5px;color:var(--ink-3);line-height:1.3}
+.telemetry dd{font-family:var(--mono);font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:11px 16px;border-top:1px solid var(--line)}
+.cell-hint{margin-right:auto;font-size:13px;color:var(--ink-3);line-height:1.4}
+</style>
+<style>
+/* Sections */
+.section{padding-top:104px}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:32px}
+.sec-head h2{font-stretch:78%;font-weight:700;font-size:clamp(34px,4.2vw,56px);line-height:1;letter-spacing:-.01em}
+.sec-head p{color:var(--ink-2);max-width:54ch;justify-self:end}
+
+/* Project viewer: oscilloscope-style channel buttons */
+.channels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.ch-btn{display:flex;align-items:center;gap:14px;text-align:left;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.ch-btn:hover{border-color:var(--c)}
+.ch-tag{flex:none;font-family:var(--mono);font-size:11px;font-weight:500;padding:4px 7px;border-radius:5px;border:1.5px solid var(--c);color:var(--ct);transition:all .15s}
+.ch-btn strong{display:block;font-size:15.5px;font-weight:650;line-height:1.25}
+.ch-btn small{display:block;font-size:13px;color:var(--ink-3);line-height:1.3;margin-top:2px}
+.ch-btn[aria-selected="true"]{border-color:var(--c);box-shadow:inset 0 -3px 0 var(--c)}
+.ch-btn[aria-selected="true"] .ch-tag{background:var(--c);color:var(--panel)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:34px;box-shadow:var(--shadow)}
+.panel:focus-visible{outline-offset:4px}
+.p-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:start}
+.p-kicker{font-size:13.5px;color:var(--ct);font-weight:600}
+.p-head h3{font-stretch:82%;font-weight:700;font-size:clamp(26px,2.8vw,36px);line-height:1.08;margin:8px 0 12px}
+.p-sum{font-size:17px;color:var(--ink-2);max-width:64ch}
+.readout{min-width:200px;border:1px solid var(--line);border-left:3px solid var(--c);border-radius:8px;padding:12px 16px 13px;background:var(--panel-2)}
+.readout b{display:block;font-family:var(--mono);font-size:30px;font-weight:500;line-height:1.15;color:var(--ct);letter-spacing:-.03em}
+.readout span{display:block;font-size:13px;color:var(--ink-3);margin-top:4px;line-height:1.35}
+.diagram{margin:30px 0 34px;padding:30px 28px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2)}
+.diagram figcaption{margin-top:20px;font-size:13px;color:var(--ink-3);text-align:center}
+
+/* Flow diagrams with moving data packets */
+.flow{display:flex;align-items:stretch}
+.blk{flex:1 1 0;min-width:0;position:relative;background:var(--panel);border:1.5px solid var(--ink);border-radius:6px;padding:11px 13px 12px}
+.blk .k{display:block;font-size:12px;line-height:1.3;color:var(--ink-3);margin-bottom:3px}
+.blk .v{display:block;font-size:14.5px;line-height:1.3;font-weight:650}
+.blk ul{list-style:none;margin-top:8px;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.blk li+li{margin-top:3px}
+.blk.ext{border-style:dashed}
+.blk.ghost{visibility:hidden}
+.wire{flex:0 0 var(--w,54px);position:relative;min-height:24px}
+.wire.ghost{visibility:hidden}
+.wire::before{content:"";position:absolute;left:0;right:7px;top:50%;border-top:1.5px solid var(--c)}
+.wire::after{content:"";position:absolute;right:0;top:50%;margin-top:-5px;border-left:8px solid var(--c);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.wire.bi::before{left:7px}
+.wire.bi i{position:absolute;left:0;top:50%;margin-top:-5px;border-right:8px solid var(--c);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.wire span{position:absolute;left:2px;right:9px;bottom:calc(50% + 6px);text-align:center;font-size:11.5px;line-height:1.25;font-weight:600;color:var(--ct)}
+.pk{position:absolute;left:0;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--c);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent);opacity:0;animation:pk 2.6s linear infinite;animation-delay:var(--d,0s)}
+.pk.rev{animation-name:pk-rev}
+@keyframes pk{0%{left:0;opacity:0}8%{opacity:1}52%{opacity:1}60%{left:calc(100% - 9px);opacity:0}100%{left:calc(100% - 9px);opacity:0}}
+@keyframes pk-rev{0%{left:calc(100% - 9px);opacity:0}8%{opacity:1}52%{opacity:1}60%{left:0;opacity:0}100%{left:0;opacity:0}}
+.lanes{display:grid;gap:18px}
+.lane{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center}
+.lane-k{font-size:13px;font-weight:650;line-height:1.3;color:var(--ink-2);border-left:3px solid var(--c);padding-left:10px}
+
+.p-body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:44px}
+.p-body h4{font-size:15px;font-weight:650;margin-bottom:12px}
+.impl{list-style:none;display:grid;gap:12px}
+.impl li{position:relative;padding-left:22px;color:var(--ink-2)}
+.impl li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:2px;background:var(--c)}
+.impl b{color:var(--ink);font-weight:650}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;list-style:none}
+.tools li{font-size:12.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink-2)}
+.spec{width:100%;border-collapse:collapse;font-size:14px}
+.spec th,.spec td{padding:9px 0;text-align:left;vertical-align:top;line-height:1.4;border-bottom:1px solid var(--line)}
+.spec th{font-weight:500;color:var(--ink-3);width:44%;padding-right:16px}
+.spec td{font-weight:500}
+.spec tr.key td{font-family:var(--mono);font-size:13px;color:var(--ct);font-weight:600}
+.spec caption{caption-side:top;text-align:left;font-size:15px;font-weight:650;padding-bottom:4px}
+
+/* Smaller builds */
+.builds-h{font-size:15px;font-weight:650;margin:56px 0 4px}
+.builds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.build{padding:26px 28px 8px 0}
+.build+.build{padding-left:28px;border-left:1px solid var(--line)}
+.build svg{display:block;width:46px;height:46px;color:var(--ink);margin-bottom:16px}
+.build h4{font-size:17px;font-weight:650;line-height:1.3}
+.build p{font-size:14.5px;color:var(--ink-2);margin-top:8px}
+.build .stack{font-size:13px;color:var(--ink-3);margin-top:12px}
+
+/* Capability map */
+.map{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:96px;align-items:start}
+.traces{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.traces path{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round;transition:stroke-dashoffset .5s ease}
+.traces circle{stroke:none}
+.domains{position:relative;z-index:1;display:grid;gap:24px}
+.domain h3{font-size:13.5px;font-weight:600;color:var(--ink-3);margin-bottom:9px}
+.domain ul{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.skill{font-size:14px;line-height:1.2;padding:8px 13px;border-radius:999px;border:1px solid var(--line-2);background:var(--panel);cursor:pointer;transition:opacity .2s,background-color .15s,border-color .15s,color .15s}
+.skill:hover{border-color:var(--ink)}
+.skill.on{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.map.dim .skill:not(.on){color:var(--ink-3);border-color:var(--line)}
+.parts{position:relative;z-index:1;display:grid;gap:10px;list-style:none}
+.part{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);text-align:left;cursor:pointer;transition:opacity .2s,border-color .15s,box-shadow .15s}
+.part:hover{border-color:var(--c)}
+.part .des{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--ct);border:1.5px solid var(--c);border-radius:4px;padding:3px 6px}
+.part strong{font-size:14.5px;font-weight:600;line-height:1.3}
+.part.on{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 20%,transparent)}
+.map.dim .part:not(.on){opacity:.38}
+.map-status{margin-top:28px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:14.5px;color:var(--ink-2);min-height:52px}
+.map-status b{color:var(--ink);font-weight:650}
+.map-status a{color:var(--ink);font-weight:600;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.also{margin-top:16px;font-size:14.5px;color:var(--ink-2);max-width:90ch}
+.also b{color:var(--ink);font-weight:600}
+
+/* Profile */
+.profile{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}
+.statement p{font-size:17px;line-height:1.7;color:var(--ink-2);max-width:60ch}
+.statement p:first-child{font-size:21px;line-height:1.5;color:var(--ink);font-weight:500}
+.statement p+p{margin-top:16px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:32px 28px;align-content:start}
+.info .wide{grid-column:1/-1}
+.info h3{font-size:13.5px;font-weight:600;color:var(--ink-3);margin-bottom:8px}
+.rows{list-style:none;border-top:1px solid var(--line)}
+.rows li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.4}
+.rows strong{display:block;font-weight:600}
+.rows span{color:var(--ink-3)}
+.lang{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sig{display:inline-flex;align-items:flex-end;gap:2px;height:14px;flex:none}
+.sig i{width:4px;border-radius:1px;background:var(--line-2)}
+.sig i:nth-child(1){height:5px}.sig i:nth-child(2){height:8px}.sig i:nth-child(3){height:11px}.sig i:nth-child(4){height:14px}
+.sig i.on{background:var(--ch4)}
+
+/* Contact */
+.contact{padding-top:104px;padding-bottom:40px}
+.contact-in{border-top:1px solid var(--line);padding-top:48px}
+.contact h2{font-stretch:78%;font-weight:700;font-size:clamp(34px,4.2vw,56px);line-height:1}
+.contact p{color:var(--ink-2);margin-top:12px;max-width:52ch}
+.mail{display:inline-block;margin-top:26px;font-stretch:80%;font-weight:700;font-size:clamp(26px,4.4vw,56px);line-height:1.05;text-decoration:none;border-bottom:3px solid var(--ch2);padding-bottom:4px;overflow-wrap:anywhere}
+.mail:hover{color:var(--ch2-t)}
+.contact .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+footer{margin-top:64px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-top:20px;padding-bottom:28px;font-size:13.5px;color:var(--ink-3)}
+
+/* Responsive */
+@media (max-width:1080px){
+  .hero{grid-template-columns:1fr;gap:40px}
+  .sec-head{grid-template-columns:1fr;gap:12px}
+  .sec-head p{justify-self:start}
+  .map{gap:64px}
+}
+@media (max-width:900px){
+  .p-head,.p-body,.profile{grid-template-columns:1fr;gap:28px}
+  .readout{justify-self:start}
+  .map{grid-template-columns:1fr;gap:28px}
+  .parts{grid-template-columns:repeat(2,minmax(0,1fr));order:-1}
+  .traces{display:none}
+  .builds{grid-template-columns:1fr}
+  .build,.build+.build{padding:22px 0;border-left:0}
+  .build+.build{border-top:1px solid var(--line)}
+}
+@media (max-width:780px){
+  .flow{flex-direction:column}
+  .wire{flex:0 0 auto;height:var(--h,40px);min-height:0}
+  .wire::before{left:50%;right:auto;top:0;bottom:7px;border-top:0;border-left:1.5px solid var(--c);margin-left:-.75px}
+  .wire::after{left:50%;right:auto;top:auto;bottom:0;margin:0 0 0 -5px;border:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--c)}
+  .wire.bi::before{left:50%;top:7px}
+  .wire.bi i{left:50%;top:0;margin:0 0 0 -5px;border:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid var(--c)}
+  .wire span{left:calc(50% + 14px);right:0;bottom:auto;top:50%;transform:translateY(-50%);text-align:left}
+  .wire.ghost,.blk.ghost{display:none}
+  .pk{left:50%;margin:0 0 0 -4px;top:0;animation-name:pk-v}
+  .pk.rev{animation-name:pk-v-rev}
+  @keyframes pk-v{0%{top:0;opacity:0}8%{opacity:1}52%{opacity:1}60%{top:calc(100% - 9px);opacity:0}100%{top:calc(100% - 9px);opacity:0}}
+  @keyframes pk-v-rev{0%{top:calc(100% - 9px);opacity:0}8%{opacity:1}52%{opacity:1}60%{top:0;opacity:0}100%{top:0;opacity:0}}
+  .lane{grid-template-columns:1fr;gap:10px}
+  .channels{grid-template-columns:1fr;gap:8px}
+  .facts{grid-template-columns:1fr;gap:12px}
+}
+@media (max-width:640px){
+  .wrap{padding-left:16px;padding-right:16px}
+  .top-in{height:64px;gap:12px}
+  .chip b{display:none}
+  .bus a{flex-direction:column;gap:4px;padding:4px 2px;font-size:11.5px;background:transparent}
+  .bus::before,.bus::after{top:15px}
+  .hero{padding-top:36px;padding-bottom:48px}
+  .panel{padding:22px 18px;border-radius:12px}
+  .diagram{padding:20px 16px 14px}
+  .telemetry div{padding:7px 9px}
+  .telemetry dd{font-size:11px}
+  .cell-bar,.cell-foot{padding:10px 12px}
+  .parts{grid-template-columns:1fr}
+  .info{grid-template-columns:1fr}
+  .section,.contact{padding-top:80px}
+  #cell .c-detlabel,#cell .c-binlabel{font-size:9.5px}
+  #cell .c-alabel,#cell .c-note{font-size:10.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pk{display:none}
+  .traces path{transition:none}
+}
+@media print{
+  :root:not(#_),:root[data-theme]{--bg:#fff;--panel:#fff;--panel-2:#fff;--sunk:#f2f2f2;--ink:#111;--ink-2:#333;--ink-3:#555;--line:#ccc;--line-2:#aaa;--shadow:none;color-scheme:light}
+  .top,.skip,.cell,.channels,.hero .actions,.contact .actions,.map-status,.traces{display:none!important}
+  .hero{grid-template-columns:1fr;padding-top:0;padding-bottom:12pt}
+  .hero-band::before,.pk{display:none}
+  .panel[hidden]{display:block!important}
+  .panel{box-shadow:none;margin-bottom:18pt;break-inside:auto}
+  .section,.contact{padding-top:28pt}
+  .diagram,.spec,.build,.rows li,.cell{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="chip" href="#top" aria-label="D. Uuganbadrakh, back to top">
+      <svg width="36" height="30" viewBox="0 0 36 30" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M2 8h5M2 15h5M2 22h5M29 8h5M29 15h5M29 22h5"/>
+          <rect x="7" y="2.75" width="22" height="24.5" rx="2.5" fill="var(--panel)"/>
+          <path d="M15 2.75a3 3 0 0 0 6 0" fill="none"/>
+        </g>
+        <text x="18" y="19.5" text-anchor="middle" font-family="var(--mono)" font-size="7.5" font-weight="600" fill="currentColor">DU</text>
+      </svg>
+      <b>D. Uuganbadrakh</b>
+    </a>
+    <nav class="bus" id="bus" aria-label="Sections">
+      <ul>
+        <li><a href="#work"><span class="node"></span><span>Work</span></a></li>
+        <li><a href="#skills"><span class="node"></span><span>Skills</span></a></li>
+        <li><a href="#profile"><span class="node"></span><span>Profile</span></a></li>
+        <li><a href="#contact"><span class="node"></span><span>Contact</span></a></li>
+      </ul>
+    </nav>
+    <button class="switch" type="button" id="theme" aria-pressed="false" aria-label="Dark theme">
+      <svg class="moon" viewBox="0 0 12 12" aria-hidden="true"><path d="M8.6 8.4A4.5 4.5 0 0 1 4.1 1.6 4.5 4.5 0 1 0 10.4 7.9a4.5 4.5 0 0 1-1.8.5z" fill="currentColor"/></svg>
+      <svg class="sun" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="2.4" fill="currentColor"/><path d="M6 .6v1.6M6 9.8v1.6M.6 6h1.6M9.8 6h1.6M2.2 2.2l1.1 1.1M8.7 8.7l1.1 1.1M2.2 9.8l1.1-1.1M8.7 3.3l1.1-1.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+<div class="hero-band" id="top">
+  <section class="wrap hero" aria-labelledby="name">
+    <div>
+      <p class="status"><span class="led" aria-hidden="true"></span>Open to opportunities</p>
+      <h1 class="name" id="name">D. Uuganbadrakh</h1>
+      <p class="role">Electronics engineer building embedded, vision-guided and industrial control systems.</p>
+      <p class="lede">I work across the whole signal chain, from sensor interface and firmware to control logic and the operator’s dashboard. The arm on this page is solved live with geometric inverse kinematics, the method behind my thesis robot.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">View projects</a>
+        <a class="btn" href="mailto:duuganbadrakh69@gmail.com">Email me</a>
+      </div>
+      <dl class="facts">
+        <div><dt>Currently</dt><dd>Electronics Engineer, Brainstorm Holding</dd></div>
+        <div><dt>Education</dt><dd>Electronics Engineering, National University of Mongolia</dd></div>
+        <div><dt>Based in</dt><dd>Ulaanbaatar, Mongolia</dd></div>
+      </dl>
+    </div>
+
+    <div class="cell" id="workcell">
+      <div class="cell-bar">
+        <p class="cell-title">Workcell<span>Elevation view, mm</span></p>
+        <label class="toggle"><input type="checkbox" id="det-toggle" checked>Detections</label>
+      </div>
+      <svg id="cell" viewBox="0 0 460 330" role="group" aria-labelledby="cell-t cell-d">
+        <title id="cell-t">Robot arm workcell</title>
+        <desc id="cell-d">A three-joint arm solved with geometric inverse kinematics. Select a block to sort it into the bin of matching hue.</desc>
+      </svg>
+      <dl class="telemetry" aria-hidden="true">
+        <div><dt>θ1 shoulder</dt><dd id="tm-a1">0.0°</dd></div>
+        <div><dt>θ2 elbow</dt><dd id="tm-a2">0.0°</dd></div>
+        <div><dt>θ3 wrist</dt><dd id="tm-a3">0.0°</dd></div>
+        <div><dt>Gripper</dt><dd id="tm-g">Open</dd></div>
+        <div><dt>Tool X</dt><dd id="tm-x">0.0 mm</dd></div>
+        <div><dt>Tool Y</dt><dd id="tm-y">0.0 mm</dd></div>
+        <div><dt>State</dt><dd id="tm-s">Idle</dd></div>
+        <div><dt>Sorted</dt><dd id="tm-n">0 of 3</dd></div>
+      </dl>
+      <div class="cell-foot">
+        <p class="cell-hint">Select a block to sort it by hue, or move the pointer to steer the arm.</p>
+        <button class="btn sm" type="button" id="sort-all">Sort all</button>
+        <button class="btn sm" type="button" id="reset" disabled>Reset</button>
+      </div>
+      <p class="sr" aria-live="polite" id="cell-live"></p>
+      <noscript><p class="cell-hint" style="padding:0 16px 12px">Turn on JavaScript to run the interactive arm.</p></noscript>
+    </div>
+  </section>
+</div>
+
+<section class="wrap section" id="work" aria-labelledby="work-h">
+  <div class="sec-head">
+    <h2 id="work-h">Selected work</h2>
+    <p>Three systems in depth, each with its architecture, implementation and measured results. Smaller builds follow.</p>
+  </div>
+
+  <div class="channels" role="tablist" aria-label="Projects">
+    <button class="ch-btn c1" role="tab" id="tab-thesis" aria-controls="thesis" aria-selected="true" tabindex="0">
+      <span class="ch-tag">CH1</span><span><strong>Vision-guided robot</strong><small>Bachelor’s thesis</small></span>
+    </button>
+    <button class="ch-btn c2" role="tab" id="tab-greenhouse" aria-controls="greenhouse" aria-selected="false" tabindex="-1">
+      <span class="ch-tag">CH2</span><span><strong>Smart greenhouse</strong><small>IoT, agriculture</small></span>
+    </button>
+    <button class="ch-btn c3" role="tab" id="tab-conveyor" aria-controls="conveyor" aria-selected="false" tabindex="-1">
+      <span class="ch-tag">CH3</span><span><strong>Conveyor safety</strong><small>Industrial automation</small></span>
+    </button>
+  </div>
+
+  <!-- CH1 -->
+  <article class="panel c1" role="tabpanel" id="thesis" aria-labelledby="tab-thesis" tabindex="0">
+    <div class="p-head">
+      <div>
+        <p class="p-kicker">Bachelor’s thesis, National University of Mongolia</p>
+        <h3>Vision-guided 6-DOF pick-and-place robot</h3>
+        <p class="p-sum">A color-sorting robot built on a Yahboom DOFBOT arm. The system locates objects in the camera image, maps them into workspace coordinates, and executes each pick-and-place move through geometric inverse kinematics.</p>
+      </div>
+      <p class="readout"><b>2.8 mm</b><span>Mean camera-to-workspace calibration error</span></p>
+    </div>
+    <figure class="diagram">
+      <div class="flow">
+        <div class="blk"><span class="k">Vision sensor</span><span class="v">Intel RealSense D435i</span></div>
+        <div class="wire" style="--w:64px"><span>Frames</span><b class="pk"></b></div>
+        <div class="blk"><span class="k">Host PC (laptop)</span><span class="v">Perception</span>
+          <ul><li>HSV color segmentation</li><li>AprilTag localization</li><li>Homography: pixel to workspace</li></ul></div>
+        <div class="wire" style="--w:104px;--h:46px"><span>XYZ targets over TCP/IP, port 5000</span><b class="pk" style="--d:.6s"></b></div>
+        <div class="blk"><span class="k">NVIDIA Jetson Nano B01</span><span class="v">Motion control</span>
+          <ul><li>Geometric inverse kinematics</li><li>Servo joint commands</li></ul></div>
+        <div class="wire" style="--w:72px"><span>Joint commands</span><b class="pk" style="--d:1.2s"></b></div>
+        <div class="blk"><span class="k">Manipulator</span><span class="v">Yahboom DOFBOT</span>
+          <ul><li>6-DOF servo arm</li><li>Pick-and-place sequence</li></ul></div>
+      </div>
+      <figcaption>Perception runs on the host PC; kinematics and servo control run on the Jetson Nano.</figcaption>
+    </figure>
+    <div class="p-body">
+      <div>
+        <h4>Implementation</h4>
+        <ul class="impl">
+          <li><b>Perception.</b> HSV thresholding segments target objects by color, AprilTag fiducials fix the workspace reference frame, and a planar homography maps image pixels to workspace coordinates.</li>
+          <li><b>Communication.</b> The host streams XYZ targets to the Jetson over a TCP socket on port 5000, keeping vision processing separate from motion control.</li>
+          <li><b>Motion.</b> The Jetson solves geometric inverse kinematics for each target and drives the arm’s servos through the pick-and-place sequence.</li>
+          <li><b>Calibration.</b> Camera-to-workspace calibration reached a mean error of 2.8&nbsp;mm.</li>
+        </ul>
+        <ul class="tools" aria-label="Toolchain"><li>Python</li><li>OpenCV</li><li>AprilTag</li><li>Intel RealSense D435i</li><li>NVIDIA Jetson Nano</li><li>TCP/IP sockets</li></ul>
+      </div>
+      <table class="spec">
+        <caption>Specifications</caption>
+        <tbody>
+          <tr><th scope="row">Manipulator</th><td>Yahboom DOFBOT, 6-DOF servo arm</td></tr>
+          <tr><th scope="row">Motion controller</th><td>NVIDIA Jetson Nano B01</td></tr>
+          <tr><th scope="row">Perception host</th><td>Laptop running Python and OpenCV</td></tr>
+          <tr><th scope="row">Vision sensor</th><td>Intel RealSense D435i</td></tr>
+          <tr><th scope="row">Object detection</th><td>HSV color segmentation</td></tr>
+          <tr><th scope="row">Workspace localization</th><td>AprilTag fiducials, planar homography</td></tr>
+          <tr><th scope="row">Kinematics</th><td>Geometric inverse kinematics</td></tr>
+          <tr><th scope="row">Command link</th><td>TCP/IP socket, port 5000</td></tr>
+          <tr class="key"><th scope="row">Calibration accuracy</th><td>2.8 mm mean error</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <!-- CH2 -->
+  <article class="panel c2" role="tabpanel" id="greenhouse" aria-labelledby="tab-greenhouse" tabindex="0" hidden>
+    <div class="p-head">
+      <div>
+        <p class="p-kicker">IoT, agriculture</p>
+        <h3>Smart greenhouse monitoring and control</h3>
+        <p class="p-sum">A two-node wireless system for greenhouse automation. A field node handles sensing and actuation inside the greenhouse; a control hub runs the control logic, serves the dashboard and sends alerts.</p>
+      </div>
+      <p class="readout"><b>2 × ESP32</b><span>Field node and control hub, linked over ESP-NOW</span></p>
+    </div>
+    <figure class="diagram">
+      <div class="flow">
+        <div class="blk"><span class="k">Field I/O</span><span class="v">Sensors and actuators</span>
+          <ul><li>DHT22 temperature, humidity</li><li>LDR light level</li><li>Soil moisture probe</li><li>Relays: fans, pumps, grow lights</li></ul></div>
+        <div class="wire bi" style="--w:92px;--h:44px"><i></i><span>Readings, relay control</span><b class="pk"></b><b class="pk rev" style="--d:1.3s"></b></div>
+        <div class="blk"><span class="k">ESP32 #2</span><span class="v">Greenhouse node</span>
+          <ul><li>Sensor acquisition</li><li>Relay drivers</li></ul></div>
+        <div class="wire bi" style="--w:84px"><i></i><span>ESP-NOW</span><b class="pk" style="--d:.4s"></b><b class="pk rev" style="--d:1.7s"></b></div>
+        <div class="blk"><span class="k">ESP32 #1</span><span class="v">Control hub</span>
+          <ul><li>Control logic and thresholds</li><li>Web server over Wi-Fi</li></ul></div>
+        <div class="wire" style="--w:64px"><span>Wi-Fi</span><b class="pk" style="--d:.9s"></b></div>
+        <div class="blk ext"><span class="k">Operators</span><span class="v">Dashboard and alerts</span>
+          <ul><li>HTML/CSS/JS web dashboard</li><li>Telegram bot notifications</li></ul></div>
+      </div>
+      <figcaption>Two ESP32 nodes linked peer-to-peer over ESP-NOW; the hub serves the dashboard and raises alerts.</figcaption>
+    </figure>
+    <div class="p-body">
+      <div>
+        <h4>Implementation</h4>
+        <ul class="impl">
+          <li><b>Field node.</b> ESP32 #2 samples air temperature and humidity (DHT22), light level (LDR) and soil moisture, and switches fans, pumps and grow lights through relay outputs.</li>
+          <li><b>Wireless link.</b> Node and hub exchange readings and commands over ESP-NOW, Espressif’s low-latency, connectionless peer-to-peer protocol.</li>
+          <li><b>Control hub.</b> ESP32 #1 runs the system logic and serves an HTML/CSS/JavaScript dashboard over Wi-Fi.</li>
+          <li><b>Alerting.</b> A Telegram bot notifies operators as soon as a reading breaches its threshold.</li>
+        </ul>
+        <ul class="tools" aria-label="Toolchain"><li>ESP32</li><li>ESP-NOW</li><li>DHT22</li><li>LDR</li><li>Soil moisture sensor</li><li>Relay modules</li><li>HTML/CSS/JavaScript</li><li>Telegram Bot API</li></ul>
+      </div>
+      <table class="spec">
+        <caption>Specifications</caption>
+        <tbody>
+          <tr><th scope="row">Architecture</th><td>Two ESP32 nodes: field node and control hub</td></tr>
+          <tr><th scope="row">Wireless link</th><td>ESP-NOW, peer-to-peer</td></tr>
+          <tr><th scope="row">Sensors</th><td>DHT22, LDR, soil moisture probe</td></tr>
+          <tr><th scope="row">Actuators</th><td>Relay-driven fans, pumps, grow lights</td></tr>
+          <tr><th scope="row">Operator interface</th><td>Web dashboard served by the hub over Wi-Fi</td></tr>
+          <tr><th scope="row">Alerting</th><td>Telegram bot, triggered on threshold breach</td></tr>
+          <tr class="key"><th scope="row">Monitored quantities</th><td>4: temperature, humidity, light, soil moisture</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <!-- CH3 -->
+  <article class="panel c3" role="tabpanel" id="conveyor" aria-labelledby="tab-conveyor" tabindex="0" hidden>
+    <div class="p-head">
+      <div>
+        <p class="p-kicker">Industrial automation, machine safety</p>
+        <h3>Industrial conveyor safety system</h3>
+        <p class="p-sum">Conveyor monitoring that combines PLC-based hardware interlocks with a computer-vision detection layer. Either layer can shut the conveyor down.</p>
+      </div>
+      <p class="readout"><b>&lt; 50 ms</b><span>Emergency-stop response</span></p>
+    </div>
+    <figure class="diagram">
+      <div class="lanes">
+        <div class="lane">
+          <span class="lane-k">Interlock layer</span>
+          <div class="flow">
+            <div class="blk"><span class="k">Field devices</span><span class="v">E-stop, light curtains</span></div>
+            <div class="wire"><b class="pk"></b></div>
+            <div class="blk"><span class="k">Siemens S7-1200, safety relays</span><span class="v">E-stop logic, interlocks, motor control</span></div>
+            <div class="wire"><b class="pk" style="--d:.6s"></b></div>
+            <div class="blk"><span class="k">Actuator</span><span class="v">Conveyor drive</span></div>
+          </div>
+        </div>
+        <div class="lane">
+          <span class="lane-k">Vision layer</span>
+          <div class="flow">
+            <div class="blk"><span class="k">Sensor</span><span class="v">Camera</span></div>
+            <div class="wire"><b class="pk" style="--d:.3s"></b></div>
+            <div class="blk"><span class="k">Embedded IPC, OpenCV</span><span class="v">Proximity, intrusion, misalignment</span></div>
+            <div class="wire"><b class="pk" style="--d:.9s"></b></div>
+            <div class="blk"><span class="k">On fault</span><span class="v">Immediate shutdown</span></div>
+          </div>
+        </div>
+        <div class="lane">
+          <span class="lane-k">Operator layer</span>
+          <div class="flow">
+            <div class="blk ext"><span class="k">HMI panel</span><span class="v">Live status, event log</span></div>
+            <div class="wire bi"><i></i><span>Status, events</span><b class="pk rev" style="--d:.5s"></b></div>
+            <div class="blk"><span class="k">Controller</span><span class="v">Siemens S7-1200</span></div>
+            <div class="wire ghost" aria-hidden="true"></div>
+            <div class="blk ghost" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <figcaption>Dual-redundant architecture: PLC interlocks and a parallel vision pipeline can each stop the line.</figcaption>
+    </figure>
+    <div class="p-body">
+      <div>
+        <h4>Implementation</h4>
+        <ul class="impl">
+          <li><b>Control and interlocks.</b> A Siemens S7-1200 PLC, programmed in TIA Portal with ladder logic, manages emergency-stop logic, motor control and the light curtains, with safety relays in the stop chain.</li>
+          <li><b>Vision layer.</b> A parallel OpenCV pipeline on an embedded industrial PC detects human proximity, foreign-object intrusion and belt misalignment using edge detection and motion analysis.</li>
+          <li><b>Redundancy.</b> The two layers operate independently, so a fault detected by either one shuts the conveyor down. Emergency-stop response is under 50&nbsp;ms.</li>
+          <li><b>Operator interface.</b> An HMI panel shows live system status and keeps an event log.</li>
+        </ul>
+        <ul class="tools" aria-label="Toolchain"><li>Siemens S7-1200</li><li>TIA Portal</li><li>Ladder logic</li><li>HMI</li><li>Safety relays</li><li>Python</li><li>OpenCV</li></ul>
+      </div>
+      <table class="spec">
+        <caption>Specifications</caption>
+        <tbody>
+          <tr><th scope="row">Controller</th><td>Siemens S7-1200 PLC</td></tr>
+          <tr><th scope="row">Programming</th><td>TIA Portal, ladder logic</td></tr>
+          <tr><th scope="row">Safety devices</th><td>Emergency stop, light curtains, safety relays</td></tr>
+          <tr><th scope="row">Vision platform</th><td>Python and OpenCV on an embedded industrial PC</td></tr>
+          <tr><th scope="row">Detected conditions</th><td>Human proximity, foreign-object intrusion, belt misalignment</td></tr>
+          <tr><th scope="row">Detection methods</th><td>Edge detection, motion analysis</td></tr>
+          <tr><th scope="row">Architecture</th><td>Dual-redundant: PLC interlocks and vision layer</td></tr>
+          <tr><th scope="row">Operator interface</th><td>HMI with real-time status and event logging</td></tr>
+          <tr class="key"><th scope="row">Emergency-stop response</th><td>&lt; 50 ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <h3 class="builds-h" id="builds">Smaller builds</h3>
+  <div class="builds c4">
+    <article class="build" id="b-bin">
+      <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <rect x="3" y="13" width="40" height="21" rx="2"/><circle cx="14" cy="23.5" r="6.5"/><circle cx="14" cy="23.5" r="2.6"/>
+        <circle cx="32" cy="23.5" r="6.5"/><circle cx="32" cy="23.5" r="2.6"/><path d="M17 34v5M21 34v5M25 34v5M29 34v5"/>
+        <path d="M9 8.5c3-3 7-3 10 0M27 8.5c3-3 7-3 10 0" stroke="var(--ch4)"/>
+      </svg>
+      <h4>Smart waste bin controller</h4>
+      <p>ESP32 firmware for touchless lid actuation using ultrasonic proximity sensing, plus capacitive touch input on GPIO. Tasks run on non-blocking, millis()-based scheduling instead of delay() calls; notifications go out through the Telegram Bot API.</p>
+      <p class="stack">ESP32, C++, Telegram Bot API</p>
+    </article>
+    <article class="build" id="b-audio">
+      <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+        <rect x="7" y="17" width="7" height="12"/><path d="M14 17l10-8v28l-10-8"/>
+        <path d="M30 17.5a8 8 0 0 1 0 11M34.5 13a14 14 0 0 1 0 20" stroke="var(--ch4)"/>
+      </svg>
+      <h4>Bluetooth A2DP audio player</h4>
+      <p>Streams raw PCM audio from an SD card over Bluetooth A2DP on the ESP32, with real-time buffering and playback control.</p>
+      <p class="stack">ESP32, Bluetooth A2DP, C++, SD card</p>
+    </article>
+    <article class="build" id="b-oled">
+      <svg viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <rect x="4" y="11" width="38" height="27" rx="2"/><rect x="9" y="16.5" width="28" height="16" rx="1"/>
+        <path d="M15 11V5.5M20 11V5.5M26 11V5.5M31 11V5.5"/><path d="M13 21.5h11M13 25h16M13 28.5h7" stroke="var(--ch4)"/>
+      </svg>
+      <h4>Meeting room schedule display</h4>
+      <p>A Flask backend authenticates to the Google Calendar API through OAuth&nbsp;2.0 and pushes live room bookings to an Arduino-driven OLED display, which parses the JSON payload with ArduinoJson.</p>
+      <p class="stack">Python, Flask, Google Calendar API, OAuth 2.0, Arduino, ArduinoJson, OLED</p>
+    </article>
+  </div>
+</section>
+
+<section class="wrap section" id="skills" aria-labelledby="skills-h">
+  <div class="sec-head">
+    <h2 id="skills-h">Capability map</h2>
+    <p>Select a skill to trace it to the projects that use it, or select a project to see its full stack.</p>
+  </div>
+  <div class="map" id="map">
+    <svg class="traces" id="traces" aria-hidden="true"></svg>
+    <div class="domains">
+      <div class="domain"><h3>Robotics and vision</h3><ul>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">Inverse kinematics</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">Pick-and-place automation</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1 p3">OpenCV</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">HSV color segmentation</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">AprilTag localization</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">Homography</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p3">Edge and motion detection</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">Intel RealSense D435i</button></li>
+      </ul></div>
+      <div class="domain"><h3>Embedded systems</h3><ul>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p2 p4 p5">ESP32</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p6">Arduino</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">NVIDIA Jetson Nano</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p4 p5">C/C++ firmware</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p4">Non-blocking scheduling</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p2 p4">Sensor interfacing</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p2 p3">Relay and motor control</button></li>
+      </ul></div>
+      <div class="domain"><h3>Industrial automation</h3><ul>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p3">Siemens S7-1200</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p3">TIA Portal, ladder logic</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p3">HMI</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p3">Safety interlocks and relays</button></li>
+      </ul></div>
+      <div class="domain"><h3>Connectivity and software</h3><ul>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p2">ESP-NOW</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1">TCP/IP sockets</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p5">Bluetooth A2DP</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p2">Wi-Fi web dashboards</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p2 p4">Telegram Bot API</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p1 p3 p6">Python</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p6">Flask</button></li>
+        <li><button class="skill" type="button" aria-pressed="false" data-p="p6">Google OAuth 2.0</button></li>
+      </ul></div>
+    </div>
+    <ul class="parts">
+      <li><button class="part c1" type="button" aria-pressed="false" data-part="p1" data-href="#thesis"><span class="des">U1</span><strong>Vision-guided robot</strong></button></li>
+      <li><button class="part c2" type="button" aria-pressed="false" data-part="p2" data-href="#greenhouse"><span class="des">U2</span><strong>Smart greenhouse</strong></button></li>
+      <li><button class="part c3" type="button" aria-pressed="false" data-part="p3" data-href="#conveyor"><span class="des">U3</span><strong>Conveyor safety system</strong></button></li>
+      <li><button class="part c4" type="button" aria-pressed="false" data-part="p4" data-href="#b-bin"><span class="des">U4</span><strong>Smart waste bin controller</strong></button></li>
+      <li><button class="part c4" type="button" aria-pressed="false" data-part="p5" data-href="#b-audio"><span class="des">U5</span><strong>Bluetooth A2DP audio player</strong></button></li>
+      <li><button class="part c4" type="button" aria-pressed="false" data-part="p6" data-href="#b-oled"><span class="des">U6</span><strong>Meeting room display</strong></button></li>
+    </ul>
+  </div>
+  <p class="map-status" id="map-status" aria-live="polite">Select a skill or a project to see how they connect.</p>
+  <p class="also"><b>Also experienced with:</b> ROS, MoveIt, Zephyr RTOS, LoRa, MQTT, Raspberry Pi, Verilog and VHDL for FPGA design, and CTF security practice on TryHackMe, Hack The Box and picoCTF.</p>
+</section>
+
+<section class="wrap section" id="profile" aria-labelledby="profile-h">
+  <div class="sec-head">
+    <h2 id="profile-h">Profile</h2>
+  </div>
+  <div class="profile">
+    <div class="statement">
+      <p>I’m an electronics engineer at Brainstorm Holding and a graduate of the National University of Mongolia, where my bachelor’s thesis delivered a vision-guided robotic arm system.</p>
+      <p>My work sits where embedded hardware meets intelligent software: bare-metal firmware, RTL in Verilog, computer vision pipelines and inverse kinematics for physical robot arms. I design across the whole signal chain, from the sensor interface to the operator’s dashboard.</p>
+      <p>Outside engineering, I have worked as a tour guide and operations manager and completed mandatory military service. Both sharpened how I communicate, plan and stay composed under pressure.</p>
+      <p>I’m looking for roles in embedded systems, robotics and automation, or IoT engineering, building equipment that is dependable in service and genuinely useful.</p>
+    </div>
+    <div class="info">
+      <div>
+        <h3>Education</h3>
+        <ul class="rows">
+          <li><strong>Electronics Engineering</strong><span>National University of Mongolia, MTES / EHIT Department</span></li>
+          <li><strong>Bachelor’s thesis</strong><span>Vision-guided 6-DOF pick-and-place robot</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Languages</h3>
+        <ul class="rows">
+          <li class="lang"><div><strong>Mongolian</strong><span>Native</span></div><span class="sig" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></li>
+          <li class="lang"><div><strong>English</strong><span>Professional working proficiency</span></div><span class="sig" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></li>
+          <li class="lang"><div><strong>Russian</strong><span>Conversational</span></div><span class="sig" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Experience</h3>
+        <ul class="rows">
+          <li><strong>Electronics Engineer</strong><span>Brainstorm Holding, current</span></li>
+          <li><strong>Tour guide and operations manager</strong><span>Tourism</span></li>
+          <li><strong>Military service</strong><span>Mandatory service, completed</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Interests</h3>
+        <ul class="rows">
+          <li><strong>Drone systems</strong></li>
+          <li><strong>Open-source robotics</strong></li>
+          <li><strong>OSINT and ethical hacking</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap contact" id="contact" aria-labelledby="contact-h">
+  <div class="contact-in">
+    <div>
+      <h2 id="contact-h">Contact</h2>
+      <p>Open to embedded systems, robotics and IoT engineering roles, and to technical collaboration.</p>
+      <a class="mail" href="mailto:duuganbadrakh69@gmail.com">duuganbadrakh69@gmail.com</a>
+    </div>
+    <div class="actions">
+      <button class="btn" type="button" data-copy="duuganbadrakh69@gmail.com"><span>Copy address</span></button>
+      <a class="btn" href="https://github.com/saintbdrh" target="_blank" rel="noopener">GitHub</a>
+      <button class="btn" type="button" data-print>Save as PDF</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 D. Uuganbadrakh, Ulaanbaatar, Mongolia</span><span>The workcell demo solves inverse kinematics live in your browser.</span></div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"D. Uuganbadrakh","jobTitle":"Electronics Engineer",
+ "worksFor":{"@type":"Organization","name":"Brainstorm Holding"},
+ "alumniOf":{"@type":"CollegeOrUniversity","name":"National University of Mongolia"},
+ "address":{"@type":"PostalAddress","addressLocality":"Ulaanbaatar","addressCountry":"MN"},
+ "email":"mailto:duuganbadrakh69@gmail.com","url":"https://saintbdrh.github.io/","sameAs":["https://github.com/saintbdrh"],"knowsLanguage":["mn","en","ru"]}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
+  function all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  /* Theme switch */
+  var themeBtn = document.getElementById('theme');
+  function theme() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function syncTheme() { themeBtn.setAttribute('aria-pressed', theme() === 'dark' ? 'true' : 'false'); }
+  themeBtn.addEventListener('click', function () {
+    var t = theme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem('theme', t); } catch (e) {}
+    syncTheme();
+    drawTraces(lastPairs);
+  });
+  syncTheme();
+
+  /* Section bus: active node plus a fill that tracks scroll position between nodes */
+  var bus = document.getElementById('bus');
+  var links = all('a', bus);
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var ticking = false;
+  function updateBus() {
+    ticking = false;
+    var y = window.scrollY, probe = y + window.innerHeight * 0.35;
+    var tops = secs.map(function (s) { return s.getBoundingClientRect().top + y; });
+    var i = -1;
+    tops.forEach(function (t, k) { if (t <= probe) i = k; });
+    if (window.innerHeight + y >= document.documentElement.scrollHeight - 4) i = secs.length - 1;
+    links.forEach(function (a, k) { a.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    var br = bus.getBoundingClientRect();
+    var xs = links.map(function (a) { var n = a.querySelector('.node').getBoundingClientRect(); return n.left + n.width / 2 - br.left; });
+    var fill;
+    if (i < 0) fill = xs[0] * Math.max(0, Math.min(1, y / Math.max(1, tops[0] - window.innerHeight * 0.35)));
+    else if (i >= secs.length - 1) fill = xs[xs.length - 1];
+    else fill = xs[i] + Math.max(0, Math.min(1, (probe - tops[i]) / Math.max(1, tops[i + 1] - tops[i]))) * (xs[i + 1] - xs[i]);
+    bus.style.setProperty('--fill', fill.toFixed(1) + 'px');
+  }
+  function requestBus() { if (!ticking) { ticking = true; requestAnimationFrame(updateBus); } }
+  window.addEventListener('scroll', requestBus, { passive: true });
+  window.addEventListener('resize', requestBus);
+  updateBus();
+
+  /* Project channels (tabs) */
+  var tabs = all('.channels [role="tab"]');
+  function selectTab(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, k) {
+    t.addEventListener('click', function () { selectTab(t); });
+    t.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = tabs[(k + 1) % tabs.length];
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = tabs[(k + tabs.length - 1) % tabs.length];
+      else if (e.key === 'Home') n = tabs[0];
+      else if (e.key === 'End') n = tabs[tabs.length - 1];
+      if (n) { e.preventDefault(); selectTab(n, true); }
+    });
+  });
+  function tabFor(hash) {
+    return tabs.filter(function (t) { return '#' + t.getAttribute('aria-controls') === hash; })[0];
+  }
+  function openProject(hash) {
+    var tab = tabFor(hash);
+    if (!tab) return false;
+    selectTab(tab);
+    document.getElementById('work').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    return true;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a && tabFor(a.getAttribute('href'))) {
+      e.preventDefault();
+      openProject(a.getAttribute('href'));
+      try { history.replaceState(null, '', a.getAttribute('href')); } catch (err) {}
+    }
+  });
+  if (location.hash && tabFor(location.hash)) openProject(location.hash);
+
+  /* Capability map: skills and projects highlight each other; traces drawn on wide screens */
+  var map = document.getElementById('map');
+  var traces = document.getElementById('traces');
+  var statusEl = document.getElementById('map-status');
+  var skills = all('.skill', map), parts = all('.part', map);
+  var partById = {};
+  parts.forEach(function (p) { partById[p.getAttribute('data-part')] = p; });
+  var wide = window.matchMedia('(min-width: 901px)');
+  var locked = null, lastPairs = [];
+  function ids(skill) { return skill.getAttribute('data-p').split(' '); }
+  function partName(p) { return p.querySelector('strong').textContent; }
+  function link(p) { var a = document.createElement('a'); a.href = p.getAttribute('data-href'); a.textContent = partName(p); return a; }
+  function joinInto(node, items) {
+    items.forEach(function (it, k) {
+      if (k > 0) node.appendChild(document.createTextNode(k === items.length - 1 ? ' and ' : ', '));
+      node.appendChild(typeof it === 'string' ? document.createTextNode(it) : it);
+    });
+  }
+  function setStatus(sel) {
+    statusEl.textContent = '';
+    if (!sel) { statusEl.textContent = 'Select a skill or a project to see how they connect.'; return; }
+    var b = document.createElement('b');
+    if (sel.type === 'skill') {
+      b.textContent = sel.el.textContent;
+      statusEl.appendChild(b);
+      statusEl.appendChild(document.createTextNode(' is used in '));
+      joinInto(statusEl, ids(sel.el).map(function (id) { return link(partById[id]); }));
+    } else {
+      b.appendChild(link(sel.el));
+      statusEl.appendChild(b);
+      statusEl.appendChild(document.createTextNode(' uses '));
+      joinInto(statusEl, skills.filter(function (s) { return ids(s).indexOf(sel.el.getAttribute('data-part')) > -1; })
+        .map(function (s) { return s.textContent; }));
+    }
+    statusEl.appendChild(document.createTextNode('.'));
+  }
+  function apply(sel) {
+    skills.concat(parts).forEach(function (n) { n.classList.remove('on'); });
+    if (!sel) { map.classList.remove('dim'); drawTraces([]); setStatus(null); return; }
+    var pairs = [];
+    sel.el.classList.add('on');
+    if (sel.type === 'skill') {
+      ids(sel.el).forEach(function (id) { partById[id].classList.add('on'); pairs.push([sel.el, partById[id]]); });
+    } else {
+      skills.forEach(function (s) {
+        if (ids(s).indexOf(sel.el.getAttribute('data-part')) > -1) { s.classList.add('on'); pairs.push([s, sel.el]); }
+      });
+    }
+    map.classList.add('dim');
+    drawTraces(pairs);
+    setStatus(sel);
+  }
+  function drawTraces(pairs) {
+    lastPairs = pairs || [];
+    while (traces.firstChild) traces.removeChild(traces.firstChild);
+    if (!wide.matches || !lastPairs.length) return;
+    var mr = map.getBoundingClientRect();
+    var gx = map.querySelector('.parts').getBoundingClientRect().left - mr.left - 44;
+    lastPairs.forEach(function (pr, k) {
+      var a = pr[0].getBoundingClientRect(), b = pr[1].getBoundingClientRect();
+      var x1 = a.left + a.width / 2 - mr.left, y1 = a.top + a.height / 2 - mr.top;
+      var yg = a.bottom - mr.top + 4;                       // run along the gutter under the chip row
+      var x2 = b.left - mr.left, y2 = b.top + b.height / 2 - mr.top;
+      var col = getComputedStyle(pr[1]).getPropertyValue('--c').trim() || 'currentColor';
+      var lane = gx - (k % 5) * 7, dy = y2 - yg, s = dy < 0 ? -1 : 1, r = Math.min(10, Math.abs(dy) / 2);
+      var d = 'M' + x1 + ' ' + y1 + 'V' + (yg - 5) + 'L' + (x1 + 5) + ' ' + yg + (Math.abs(dy) < 1 ? 'H' + x2
+        : 'H' + (lane - r) + 'L' + lane + ' ' + (yg + s * r) + 'V' + (y2 - s * r) + 'L' + (lane + r) + ' ' + y2 + 'H' + x2);
+      var p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', d); p.setAttribute('stroke', col);
+      traces.appendChild(p);
+      if (!reduce) {
+        var len = p.getTotalLength();
+        p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+        p.getBoundingClientRect();
+        p.style.strokeDashoffset = 0;
+      }
+      [[x1, a.bottom - mr.top + 1], [x2, y2]].forEach(function (c) {
+        var o = document.createElementNS(NS, 'circle');
+        o.setAttribute('cx', c[0]); o.setAttribute('cy', c[1]); o.setAttribute('r', 3.5); o.setAttribute('fill', col);
+        traces.appendChild(o);
+      });
+    });
+  }
+  function bind(node, type) {
+    function preview() { if (!locked) apply({ type: type, el: node }); }
+    function clear() { if (!locked) apply(null); }
+    node.addEventListener('mouseenter', preview);
+    node.addEventListener('mouseleave', clear);
+    node.addEventListener('focus', preview);
+    node.addEventListener('blur', clear);
+    node.addEventListener('click', function () {
+      if (locked && locked.el === node) { node.setAttribute('aria-pressed', 'false'); locked = null; apply(null); return; }
+      if (locked) locked.el.setAttribute('aria-pressed', 'false');
+      locked = { type: type, el: node };
+      node.setAttribute('aria-pressed', 'true');
+      apply(locked);
+    });
+  }
+  skills.forEach(function (s) { bind(s, 'skill'); });
+  parts.forEach(function (p) { bind(p, 'part'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && locked) { locked.el.setAttribute('aria-pressed', 'false'); locked = null; apply(null); }
+  });
+  var rt = null;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { drawTraces(lastPairs); }, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { drawTraces(lastPairs); requestBus(); });
+
+  /* Copy address and print */
+  function selectMail() {
+    var m = document.querySelector('.mail');
+    if (!m || !window.getSelection) return false;
+    var r = document.createRange(); r.selectNodeContents(m);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    return true;
+  }
+  all('[data-copy]').forEach(function (b) {
+    var label = b.querySelector('span') || b, orig = label.textContent;
+    function done(ok) {
+      label.textContent = ok ? 'Copied' : (selectMail() ? 'Address selected' : 'Copy failed');
+      setTimeout(function () { label.textContent = orig; }, 1800);
+    }
+    b.addEventListener('click', function () {
+      var v = b.getAttribute('data-copy');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(v).then(function () { done(true); }, function () { done(false); });
+      } else done(false);
+    });
+  });
+  all('[data-print]').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
+})();
+</script>
+
+<script>
+/* Workcell: a planar 3-joint arm with the tool held vertical. Geometric IK:
+   wrist = tool tip + L3 up; elbow angle from the law of cosines (elbow-up branch);
+   shoulder from atan2; wrist angle keeps the tool pointing straight down. */
+(function () {
+  'use strict';
+  var svg = document.getElementById('cell');
+  if (!svg) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var X0 = 60, Y0 = 300;                       // world (mm, y up) to SVG units
+  function sx(x) { return x + X0; }
+  function sy(y) { return Y0 - y; }
+  var S = { x: 0, y: 70 }, L1 = 190, L2 = 175, L3 = 60, FING = 24, HALF = 15;
+  var HOME = { x: 170, y: 150 }, TRAVEL = 100, OPEN = 42, SHUT = 31;
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e);
+    return e;
+  }
+
+  /* Scene */
+  var defs = el('defs', {});
+  var pg = el('pattern', { id: 'c-grid', width: 20, height: 20, patternUnits: 'userSpaceOnUse' }, defs);
+  el('path', { d: 'M20 0H0V20', 'class': 'c-gridl' }, pg);
+  var ph = el('pattern', { id: 'c-hatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
+  el('line', { x1: 0, y1: 0, x2: 0, y2: 6, 'class': 'c-hatch' }, ph);
+  el('rect', { x: 0, y: 0, width: 460, height: 300, fill: 'url(#c-grid)' });
+  el('circle', { cx: sx(S.x), cy: sy(S.y - L3), r: L1 + L2, 'class': 'c-reach' });
+  var ra = 40 * Math.PI / 180;
+  el('text', { x: sx((L1 + L2) * Math.cos(ra)) + 6, y: sy(S.y - L3 + (L1 + L2) * Math.sin(ra)) - 2, 'class': 'c-note' }).textContent = 'tool reach';
+
+  var BINS = [{ x: 245, c: 'c1', hue: 41 }, { x: 288, c: 'c2', hue: 191 }, { x: 331, c: 'c3', hue: 326 }];
+  BINS.forEach(function (b) {
+    var g = el('g', { 'class': b.c });
+    el('rect', { x: sx(b.x - 19), y: sy(42), width: 38, height: 42, 'class': 'c-binfloor' }, g);
+    el('path', { d: 'M' + sx(b.x - 19) + ' ' + sy(42) + 'V' + sy(1.5) + 'H' + sx(b.x + 19) + 'V' + sy(42), 'class': 'c-bin' }, g);
+    el('text', { x: sx(b.x), y: sy(50), 'class': 'c-binlabel' }, g).textContent = 'H ' + b.hue + '°';
+  });
+  el('rect', { x: 0, y: 300, width: 460, height: 30, 'class': 'c-tablebg' });
+  el('rect', { x: 0, y: 300, width: 460, height: 30, fill: 'url(#c-hatch)' });
+  el('line', { x1: 0, y1: 300, x2: 460, y2: 300, 'class': 'c-tabletop' });
+
+  var blocksG = el('g', {}), detG = el('g', {});
+  var BLOCKS = [
+    { x: 104, c: 'c2', hue: 191, name: 'cyan' },
+    { x: 150, c: 'c3', hue: 326, name: 'magenta' },
+    { x: 196, c: 'c1', hue: 41, name: 'amber' }
+  ];
+  BLOCKS.forEach(function (b) {
+    b.x0 = b.x; b.y = HALF; b.sorted = false;
+    b.bin = BINS.filter(function (k) { return k.c === b.c; })[0];
+    var g = el('g', { 'class': 'c-block ' + b.c, tabindex: 0, role: 'button', 'aria-label': 'Sort the ' + b.name + ' block, hue ' + b.hue + ' degrees' }, blocksG);
+    el('rect', { x: -26, y: -44, width: 52, height: 66, 'class': 'c-hit' }, g);
+    el('rect', { x: -HALF, y: -HALF, width: 30, height: 30, rx: 2, 'class': 'body' }, g);
+    el('rect', { x: -HALF + 3, y: -HALF + 3, width: 24, height: 6, rx: 1, 'class': 'face' }, g);
+    b.g = g;
+    var d = el('g', { 'class': 'c-detg ' + b.c }, detG);
+    el('rect', { x: -HALF - 4, y: -HALF - 4, width: 38, height: 38, 'class': 'c-det' }, d);
+    el('path', { d: 'M-4 0H4M0 -4V4', 'class': 'c-cross' }, d);
+    el('text', { x: -HALF - 4, y: -HALF - 8, 'class': 'c-detlabel' }, d).textContent = 'H ' + b.hue + '°';
+    b.d = d;
+    g.addEventListener('click', function (e) { e.stopPropagation(); pick(b); });
+    g.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(b); }
+    });
+  });
+
+  var armG = el('g', {});
+  el('rect', { x: sx(-46), y: sy(10), width: 92, height: 10, rx: 2, 'class': 'c-ped' }, armG);
+  el('rect', { x: sx(-30), y: sy(S.y), width: 60, height: S.y - 10, rx: 3, 'class': 'c-ped' }, armG);
+  function link(w) {
+    return { o: el('path', { 'class': 'lo', 'stroke-width': w + 3 }, armG), i: el('path', { 'class': 'li', 'stroke-width': w }, armG) };
+  }
+  var lk1 = link(20), lk2 = link(16), lk3 = link(10);
+  var palm = el('line', { 'class': 'c-palm' }, armG);
+  var fL = el('rect', { width: 5, height: FING, rx: 1.5, 'class': 'c-finger' }, armG);
+  var fR = el('rect', { width: 5, height: FING, rx: 1.5, 'class': 'c-finger' }, armG);
+  function joint(r) {
+    var g = el('g', {}, armG);
+    el('circle', { r: r, 'class': 'c-joint' }, g);
+    el('circle', { r: 2.2, 'class': 'c-pin' }, g);
+    return g;
+  }
+  var jS = joint(11), jE = joint(9), jW = joint(7);
+  var arcs = [1, 2, 3].map(function (n) { return el('path', { 'class': 'c-arc a' + n }, armG); });
+  var labs = [1, 2, 3].map(function (n) { var t = el('text', { 'class': 'c-alabel t' + n }, armG); t.textContent = 'θ' + n; return t; });
+  var tgt = el('g', { 'class': 'c-target', opacity: 0 });
+  el('circle', { r: 6 }, tgt);
+  el('path', { d: 'M-12 0H-3M3 0H12M0 -12V-3M0 3V12' }, tgt);
+  var cg = el('g', { 'class': 'c-corner' });
+  ['M8 22V8H22', 'M438 8H452V22', 'M452 308V322H438', 'M22 322H8V308'].forEach(function (d) { el('path', { d: d }, cg); });
+
+  /* Kinematics */
+  function norm(a) { while (a > Math.PI) a -= 2 * Math.PI; while (a <= -Math.PI) a += 2 * Math.PI; return a; }
+  function solve(t) {
+    var wx = t.x - S.x, wy = t.y + L3 - S.y;
+    var c = (wx * wx + wy * wy - L1 * L1 - L2 * L2) / (2 * L1 * L2);
+    var a2 = -Math.acos(Math.max(-1, Math.min(1, c)));
+    var a1 = Math.atan2(wy, wx) - Math.atan2(L2 * Math.sin(a2), L1 + L2 * Math.cos(a2));
+    return { a1: a1, a2: a2, a3: norm(-Math.PI / 2 - a1 - a2) };
+  }
+  function clampGoal(p) {
+    var x = Math.max(48, Math.min(392, p.x)), y = Math.max(8, Math.min(285, p.y));
+    if (x > 86 && x < 356) y = Math.max(y, 52);          // keep clear of blocks and bins while steering
+    var wx = x - S.x, wy = y + L3 - S.y, d = Math.sqrt(wx * wx + wy * wy);
+    var dmax = (L1 + L2) * 0.985, dmin = Math.abs(L1 - L2) + 12;
+    if (d > dmax) { wx *= dmax / d; wy *= dmax / d; }
+    else if (d < dmin) { var k = dmin / (d || 1); wx *= k; wy *= k; }
+    return { x: S.x + wx, y: S.y + wy - L3 };
+  }
+
+  /* Rendering */
+  var tm = {};
+  ['a1', 'a2', 'a3', 'g', 'x', 'y', 's', 'n'].forEach(function (k) { tm[k] = document.getElementById('tm-' + k); });
+  function f(v) { return v.toFixed(1); }
+  function deg(a) { var v = a * 180 / Math.PI; return (v < -0.05 ? '−' : '') + Math.abs(v).toFixed(1) + '°'; }
+  function mm(v) { return (v < -0.05 ? '−' : '') + Math.abs(v).toFixed(1) + ' mm'; }
+  function pt(p) { return f(sx(p.x)) + ' ' + f(sy(p.y)); }
+  function setLink(lk, a, b) { var d = 'M' + pt(a) + 'L' + pt(b); lk.o.setAttribute('d', d); lk.i.setAttribute('d', d); }
+  function place(g, p) { g.setAttribute('transform', 'translate(' + pt(p) + ')'); }
+  function arcD(c, r, a0, a1) {
+    var d = a1 - a0;
+    if (Math.abs(d) < 0.03) return '';
+    var p0 = { x: c.x + r * Math.cos(a0), y: c.y + r * Math.sin(a0) }, p1 = { x: c.x + r * Math.cos(a1), y: c.y + r * Math.sin(a1) };
+    return 'M' + pt(p0) + 'A' + r + ' ' + r + ' 0 ' + (Math.abs(d) > Math.PI ? 1 : 0) + ' ' + (d > 0 ? 0 : 1) + ' ' + pt(p1);
+  }
+
+  var tip = { x: HOME.x, y: HOME.y }, goal = { x: HOME.x, y: HOME.y };
+  var gap = OPEN, held = null, steps = [], step = null, seg = null, pending = [];
+  var pointerIn = false, sorted = 0, dirty = true, visible = true;
+
+  function draw() {
+    var q = solve(tip);
+    var E = { x: S.x + L1 * Math.cos(q.a1), y: S.y + L1 * Math.sin(q.a1) };
+    var b12 = q.a1 + q.a2;
+    var W = { x: E.x + L2 * Math.cos(b12), y: E.y + L2 * Math.sin(b12) };
+    var P = { x: W.x, y: W.y - (L3 - FING) };
+    setLink(lk1, S, E); setLink(lk2, E, W); setLink(lk3, W, P);
+    place(jS, S); place(jE, E); place(jW, W);
+    var h = gap / 2;
+    palm.setAttribute('x1', f(sx(P.x - h - 5))); palm.setAttribute('x2', f(sx(P.x + h + 5)));
+    palm.setAttribute('y1', f(sy(P.y))); palm.setAttribute('y2', f(sy(P.y)));
+    fL.setAttribute('x', f(sx(P.x - h - 5))); fL.setAttribute('y', f(sy(P.y)));
+    fR.setAttribute('x', f(sx(P.x + h))); fR.setAttribute('y', f(sy(P.y)));
+    [[S, 30, 0, q.a1], [E, 24, q.a1, b12], [W, 17, b12, b12 + q.a3]].forEach(function (a, k) {
+      arcs[k].setAttribute('d', arcD(a[0], a[1], a[2], a[3]));
+      var m = (a[2] + a[3]) / 2, rr = a[1] + 10;
+      labs[k].setAttribute('x', f(sx(a[0].x + rr * Math.cos(m))));
+      labs[k].setAttribute('y', f(sy(a[0].y + rr * Math.sin(m))));
+    });
+    if (held) { held.x = tip.x; held.y = tip.y + 3; }
+    BLOCKS.forEach(function (b) { place(b.g, b); place(b.d, b); });
+    var showT = pointerIn && !busy() && !reduce;
+    tgt.setAttribute('opacity', showT ? 1 : 0);
+    if (showT) place(tgt, goal);
+    tm.a1.textContent = deg(q.a1); tm.a2.textContent = deg(q.a2); tm.a3.textContent = deg(q.a3);
+    tm.x.textContent = mm(tip.x); tm.y.textContent = mm(tip.y);
+    tm.g.textContent = gap < (OPEN + SHUT) / 2 ? 'Closed' : 'Open';
+  }
+
+  /* Pick-and-place sequencer (a small state machine) */
+  var live = document.getElementById('cell-live');
+  var sortAll = document.getElementById('sort-all'), resetBtn = document.getElementById('reset');
+  function say(m) { live.textContent = m; }
+  function busy() { return !!step || steps.length > 0; }
+  function setState(s) { tm.s.textContent = s; }
+  function updateButtons() {
+    sortAll.disabled = busy() || !BLOCKS.some(function (b) { return !b.sorted; });
+    resetBtn.disabled = busy() || sorted === 0;
+    tm.n.textContent = sorted + ' of ' + BLOCKS.length;
+  }
+  function plan(b) {
+    var bx = b.x, tx = b.bin.x;
+    return [
+      { s: 'Approach', to: { x: bx, y: TRAVEL } },
+      { s: 'Descend', to: { x: bx, y: HALF - 3 } },
+      { s: 'Grasp', grip: SHUT, attach: b },
+      { s: 'Lift', to: { x: bx, y: TRAVEL } },
+      { s: 'Transfer', to: { x: tx, y: TRAVEL } },
+      { s: 'Lower', to: { x: tx, y: HALF } },
+      { s: 'Release', grip: OPEN, detach: b },
+      { s: 'Retract', to: { x: tx, y: TRAVEL } }
+    ];
+  }
+  function run(b) {
+    steps = plan(b);
+    say('Sorting the ' + b.name + ' block.');
+    next(performance.now());
+  }
+  function next(now) {
+    step = steps.shift() || null;
+    if (!step) {
+      var nb = pending.shift();
+      while (nb && nb.sorted) nb = pending.shift();
+      if (nb) { run(nb); return; }
+      setState('Idle');
+      if (!pointerIn) goal = { x: HOME.x, y: HOME.y };
+      else goal = clampGoal(goal);
+      if (sorted === BLOCKS.length) say('All blocks sorted by hue.');
+      updateButtons();
+      return;
+    }
+    setState(step.s);
+    if (step.to) {
+      var dist = Math.sqrt(Math.pow(step.to.x - tip.x, 2) + Math.pow(step.to.y - tip.y, 2));
+      seg = { move: true, from: { x: tip.x, y: tip.y }, to: step.to, t0: now, dur: reduce ? 1 : Math.max(240, Math.min(950, dist * 3.2)) };
+    } else {
+      seg = { move: false, from: gap, to: step.grip, t0: now, dur: reduce ? 1 : 260 };
+    }
+    updateButtons();
+  }
+  function pick(b) {
+    if (b.sorted || b === held) return;
+    if (busy()) { if (pending.indexOf(b) < 0) pending.push(b); return; }
+    run(b);
+  }
+  function ease(p) { return p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
+
+  var last = performance.now();
+  function frame(now) {
+    var dt = Math.min(64, now - last); last = now;
+    if (seg) {
+      var p = Math.min(1, (now - seg.t0) / seg.dur), e = ease(p);
+      if (seg.move) { tip.x = seg.from.x + (seg.to.x - seg.from.x) * e; tip.y = seg.from.y + (seg.to.y - seg.from.y) * e; }
+      else gap = seg.from + (seg.to - seg.from) * e;
+      dirty = true;
+      if (p >= 1) {
+        var st = step;
+        seg = null; step = null;
+        if (st.attach) held = st.attach;
+        if (st.detach) {
+          var b = st.detach;
+          held = null; b.x = b.bin.x; b.y = HALF + 3; b.sorted = true; sorted++;
+          b.g.classList.add('sorted'); b.g.setAttribute('aria-disabled', 'true'); b.d.style.display = 'none';
+          say('The ' + b.name + ' block is in the H ' + b.hue + '° bin.');
+        }
+        next(now);
+      }
+    } else if (!busy()) {
+      var k = reduce ? 1 : 1 - Math.exp(-dt / 120);
+      var dx = goal.x - tip.x, dy = goal.y - tip.y;
+      if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05) { tip.x += dx * k; tip.y += dy * k; dirty = true; }
+    }
+    if (dirty && visible) { draw(); dirty = false; }
+    requestAnimationFrame(frame);
+  }
+
+  /* Input */
+  function toWorld(e) {
+    var m = svg.getScreenCTM();
+    if (!m) return null;
+    var p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
+    return { x: p.x - X0, y: Y0 - p.y };
+  }
+  svg.addEventListener('pointermove', function (e) {
+    if (reduce || e.pointerType === 'touch') return;
+    var w = toWorld(e);
+    if (!w) return;
+    pointerIn = true; goal = clampGoal(w); dirty = true;
+  });
+  svg.addEventListener('pointerleave', function (e) {
+    if (e.pointerType === 'touch') return;
+    pointerIn = false; goal = { x: HOME.x, y: HOME.y }; dirty = true;
+  });
+  svg.addEventListener('click', function (e) {
+    if (busy()) return;
+    var w = toWorld(e);
+    if (w) { goal = clampGoal(w); dirty = true; }
+  });
+  document.getElementById('det-toggle').addEventListener('change', function (e) {
+    svg.classList.toggle('no-det', !e.target.checked);
+  });
+  sortAll.addEventListener('click', function () {
+    var todo = BLOCKS.filter(function (b) { return !b.sorted; });
+    if (!todo.length || busy()) return;
+    pending = todo.slice(1);
+    run(todo[0]);
+  });
+  resetBtn.addEventListener('click', function () {
+    if (busy()) return;
+    BLOCKS.forEach(function (b) {
+      b.x = b.x0; b.y = HALF; b.sorted = false;
+      b.g.classList.remove('sorted'); b.g.removeAttribute('aria-disabled'); b.d.style.display = '';
+    });
+    sorted = 0; pending = []; dirty = true;
+    say('Blocks reset to the pick area.');
+    updateButtons();
+  });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) dirty = true; }).observe(svg);
+  }
+
+  setState('Idle');
+  updateButtons();
+  draw();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
