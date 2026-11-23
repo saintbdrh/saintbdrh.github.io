@@ -9,12 +9,12 @@ import { person, capabilities, thesis } from '../data/content';
         <h1 class="display hero-name" id="hero-name">{person.name}</h1>
         <p class="hero-roles"><span>{person.role}</span><span>{person.focus}</span></p>
         <p class="hero-tagline">{person.tagline}</p>
+        <dl class="telemetry" id="telemetry" aria-label="Live joint angles of the illustrative arm">
+          {['J1', 'J2', 'J3', 'J4', 'J5', 'J6'].map((j) => (
+            <div><dt>{j}</dt><dd data-j>  0.0°</dd></div>
+          ))}
+        </dl>
       </div>
-      <dl class="telemetry" id="telemetry" data-intro aria-label="Joint angles of the illustrative arm">
-        {['J1', 'J2', 'J3', 'J4', 'J5', 'J6'].map((j) => (
-          <div><dt>{j}</dt><dd data-j>  0.0°</dd></div>
-        ))}
-      </dl>
       <a class="scroll-cue" href="#engineering" data-intro>
         <span>Scroll</span><i aria-hidden="true"></i>
       </a>

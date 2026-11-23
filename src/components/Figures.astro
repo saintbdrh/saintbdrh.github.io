@@ -65,15 +65,15 @@ const tips = [8, 12, 16, 20];
 
   {kind === 'gesture' && (
     <div class="fig-gesture-in">
-      <svg viewBox="40 40 220 240" role="img" aria-labelledby="fg-t">
+      <svg viewBox="40 40 220 256" role="img" aria-labelledby="fg-t">
         <title id="fg-t">{title}</title>
         <g class="f-bones">
           {bones.map(([a, b]) => <path d={`M${hand[a][0]} ${hand[a][1]} L${hand[b][0]} ${hand[b][1]}`} />)}
         </g>
         {tips.map((t, i) => <path class="f-pinch" style={`--i:${i}`} d={`M${hand[4][0]} ${hand[4][1]} L${hand[t][0]} ${hand[t][1]}`} />)}
         {hand.map(([x, y], i) => <circle class={i === 4 || tips.includes(i) ? 'f-node f-tip' : 'f-node'} cx={x} cy={y} r={i === 0 ? 4 : 3} />)}
-        <path class="f-dim" d="M64 272 H236 M64 266 V278 M236 266 V278" />
-        <text class="f-label f-mid" x="150" y="262">lateral position → base</text>
+        <path class="f-dim" d="M64 270 H236 M64 264 V276 M236 264 V276" />
+        <text class="f-label f-mid" x="150" y="290">lateral position → base</text>
       </svg>
       <dl class="gesture-map">
         <div><dt>Hand left / right</dt><dd>Base rotation</dd></div>
@@ -90,33 +90,31 @@ const tips = [8, 12, 16, 20];
     <svg viewBox="0 0 560 320" role="img" aria-labelledby="fgh-t">
       <title id="fgh-t">{title}</title>
       <g class="f-house">
-        <path d="M24 270 V142 L150 64 L276 142 V270 Z" />
-        <path d="M150 64 V270" class="f-faint" />
-        <path d="M24 142 H276" class="f-faint" />
-        <path d="M40 270 V244 H260 V270" class="f-bed" />
+        <path d="M20 282 V140 L160 58 L300 140 V282 Z" />
+        <path d="M20 140 H300" class="f-faint" />
+        <path d="M34 282 V256 H286 V282" class="f-bed" />
       </g>
-      <g class="f-sensor"><circle cx="84" cy="176" r="5" /><text class="f-label" x="94" y="180">DHT22 air temp., humidity</text></g>
-      <g class="f-sensor"><circle cx="150" cy="96" r="5" /><text class="f-label" x="160" y="100">LDR light</text></g>
-      <g class="f-sensor"><path d="M210 236 V262" /><circle cx="210" cy="232" r="4" /><text class="f-label" x="140" y="226">Soil probe</text></g>
-      <g class="f-act"><rect x="230" y="160" width="30" height="30" rx="15" /><text class="f-label f-end" x="224" y="170">Fan</text></g>
-      <g class="f-act"><rect x="44" y="212" width="38" height="16" rx="2" /><text class="f-label" x="88" y="224">Pump</text></g>
-      <g class="f-act"><path d="M110 132 H190" /><text class="f-label f-mid" x="150" y="126">Grow lights</text></g>
+      <g class="f-sensor"><circle cx="160" cy="86" r="5" /><text class="f-label" x="172" y="90">LDR light</text></g>
+      <g class="f-act"><path d="M112 120 H208" /><text class="f-label f-mid" x="160" y="110">Grow lights</text></g>
+      <g class="f-sensor"><circle cx="46" cy="166" r="5" /><text class="f-label" x="58" y="170">DHT22</text><text class="f-label" x="58" y="184">air temp., humidity</text></g>
+      <g class="f-act"><rect x="234" y="150" width="30" height="30" rx="15" /><text class="f-label f-mid" x="249" y="196">Fan</text></g>
+      <g class="f-node-box"><rect x="108" y="204" width="104" height="34" rx="3" /><text class="f-label f-mid f-strong" x="160" y="225">ESP32 #2 node</text></g>
+      <g class="f-act"><rect x="44" y="264" width="30" height="10" rx="2" /><text class="f-label" x="82" y="273">Pump</text></g>
+      <g class="f-sensor"><path d="M250 250 V276" /><circle cx="250" cy="246" r="4" /><text class="f-label f-end" x="240" y="250">Soil probe</text></g>
 
-      <g class="f-node-box"><rect x="98" y="194" width="104" height="34" rx="3" /><text class="f-label f-mid f-strong" x="150" y="215">ESP32 #2 node</text></g>
+      <path class="f-wire f-flow" d="M212 216 H340" />
+      <path class="f-wire f-flow f-rev" d="M340 226 H212" />
+      <text class="f-data f-mid" x="318" y="246">ESP-NOW</text>
 
-      <path class="f-wire f-flow" d="M202 211 H330" />
-      <path class="f-wire f-flow f-rev" d="M330 219 H202" />
-      <text class="f-data f-mid" x="266" y="202">ESP-NOW</text>
+      <g class="f-node-box"><rect x="340" y="198" width="108" height="44" rx="3" /><text class="f-label f-mid f-strong" x="394" y="217">ESP32 #1 hub</text><text class="f-label f-mid" x="394" y="233">control logic</text></g>
 
-      <g class="f-node-box"><rect x="330" y="192" width="112" height="44" rx="3" /><text class="f-label f-mid f-strong" x="386" y="212">ESP32 #1 hub</text><text class="f-label f-mid" x="386" y="228">control logic</text></g>
+      <path class="f-wire f-flow" d="M394 198 V122" />
+      <text class="f-data" x="402" y="164">Wi-Fi</text>
+      <g class="f-node-box f-ext"><rect x="330" y="74" width="128" height="48" rx="3" /><text class="f-label f-mid f-strong" x="394" y="96">Web dashboard</text><text class="f-label f-mid" x="394" y="112">HTML, CSS, JS</text></g>
 
-      <path class="f-wire f-flow" d="M386 192 V120" />
-      <text class="f-data" x="394" y="160">Wi-Fi</text>
-      <g class="f-node-box f-ext"><rect x="318" y="72" width="136" height="48" rx="3" /><text class="f-label f-mid f-strong" x="386" y="94">Web dashboard</text><text class="f-label f-mid" x="386" y="110">HTML, CSS, JS</text></g>
-
-      <path class="f-wire f-flow" d="M442 214 H500 V120" />
-      <g class="f-node-box f-ext"><rect x="466" y="72" width="80" height="48" rx="3" /><text class="f-label f-mid f-strong" x="506" y="94">Telegram</text><text class="f-label f-mid" x="506" y="110">alerts</text></g>
-      <text class="f-label" x="24" y="300">Field node in the greenhouse; hub with the operators. Schematic, not to scale.</text>
+      <path class="f-wire f-flow" d="M448 220 H508 V122" />
+      <g class="f-node-box f-ext"><rect x="470" y="74" width="76" height="48" rx="3" /><text class="f-label f-mid f-strong" x="508" y="96">Telegram</text><text class="f-label f-mid" x="508" y="112">alerts</text></g>
+      <text class="f-label" x="20" y="308">Field node in the greenhouse, hub with the operators. Schematic, not to scale.</text>
     </svg>
   )}
 
@@ -126,31 +124,32 @@ const tips = [8, 12, 16, 20];
       <text class="f-label f-strong" x="16" y="30">Interlock layer</text>
       <g class="f-node-box"><rect x="16" y="44" width="120" height="44" rx="3" /><text class="f-label f-mid" x="76" y="64">E-stop,</text><text class="f-label f-mid" x="76" y="79">light curtains</text></g>
       <path class="f-wire f-flow" d="M136 66 H178" />
-      <g class="f-node-box"><rect x="178" y="44" width="148" height="44" rx="3" /><text class="f-label f-mid f-strong" x="252" y="64">Siemens S7-1200</text><text class="f-label f-mid" x="252" y="79">ladder logic, safety relays</text></g>
+      <g class="f-node-box"><rect x="178" y="44" width="172" height="44" rx="3" /><text class="f-label f-mid f-strong" x="264" y="64">Siemens S7-1200</text><text class="f-label f-mid" x="264" y="79">ladder logic, safety relays</text></g>
 
       <text class="f-label f-strong" x="16" y="134">Vision layer</text>
       <g class="f-node-box"><rect x="16" y="148" width="120" height="44" rx="3" /><text class="f-label f-mid" x="76" y="175">Camera</text></g>
       <path class="f-wire f-flow" d="M136 170 H178" />
-      <g class="f-node-box"><rect x="178" y="148" width="148" height="44" rx="3" /><text class="f-label f-mid f-strong" x="252" y="168">Embedded IPC, OpenCV</text><text class="f-label f-mid" x="252" y="183">proximity, intrusion, misalignment</text></g>
+      <g class="f-node-box"><rect x="178" y="148" width="172" height="44" rx="3" /><text class="f-label f-mid f-strong" x="264" y="168">Embedded IPC, OpenCV</text><text class="f-label f-mid" x="264" y="183">proximity, intrusion, misalignment</text></g>
 
-      <path class="f-wire f-flow" d="M326 66 H372 V104 H392" />
-      <path class="f-wire f-flow" d="M326 170 H372 V132 H392" />
-      <path class="f-gate" d="M392 96 Q418 96 430 118 Q418 140 392 140 Q404 118 392 96 Z" />
-      <text class="f-data f-mid" x="410" y="160">OR</text>
-      <path class="f-wire f-stop" d="M430 118 H466" />
-      <g class="f-node-box f-key"><rect x="466" y="96" width="80" height="44" rx="3" /><text class="f-label f-mid f-strong" x="506" y="116">Stop</text><text class="f-data f-mid" x="506" y="131">&lt; 50 ms</text></g>
+      <path class="f-wire f-flow" d="M350 66 H382 V104 H402" />
+      <path class="f-wire f-flow" d="M350 170 H382 V132 H402" />
+      <path class="f-gate" d="M402 96 Q428 96 440 118 Q428 140 402 140 Q414 118 402 96 Z" />
+      <text class="f-data f-mid" x="420" y="160">OR</text>
+      <path class="f-wire f-stop" d="M440 118 H470" />
+      <g class="f-node-box f-key"><rect x="470" y="96" width="76" height="44" rx="3" /><text class="f-label f-mid f-strong" x="508" y="116">Stop</text><text class="f-data f-mid" x="508" y="131">&lt; 50 ms</text></g>
 
-      <g class="f-node-box f-ext"><rect x="178" y="226" width="148" height="40" rx="3" /><text class="f-label f-mid f-strong" x="252" y="244">HMI panel</text><text class="f-label f-mid" x="252" y="258">status, event log</text></g>
-      <path class="f-wire f-faint" d="M240 88 V226" />
-      <path class="f-wire f-faint" d="M264 226 V88" />
+      <g class="f-node-box f-ext"><rect x="178" y="236" width="172" height="40" rx="3" /><text class="f-label f-mid f-strong" x="264" y="254">HMI panel</text><text class="f-label f-mid" x="264" y="268">status, event log</text></g>
+      <path class="f-wire f-faint" d="M178 256 H160 V78 H178" />
+      <text class="f-label" x="16" y="250">status, events</text>
+      <text class="f-label" x="16" y="264">to and from the PLC</text>
 
       <g class="f-belt">
-        <circle cx="396" cy="270" r="14" /><circle cx="530" cy="270" r="14" />
-        <path d="M396 256 H530 M396 284 H530" />
-        <path class="f-belt-move" d="M396 256 H530" />
+        <circle cx="400" cy="276" r="14" /><circle cx="530" cy="276" r="14" />
+        <path d="M400 262 H530 M400 290 H530" />
+        <path class="f-belt-move" d="M400 262 H530" />
       </g>
-      <path class="f-wire f-stop" d="M506 140 V252" />
-      <text class="f-label" x="396" y="310">Conveyor drive</text>
+      <path class="f-wire f-stop" d="M508 140 V258" />
+      <text class="f-label" x="400" y="316">Conveyor drive</text>
     </svg>
   )}
   <slot />

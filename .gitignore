@@ -7,3 +7,4 @@ dist/
 .impeccable/mocks/
 .impeccable/questions/
 .impeccable/config.local.json
+.claude/

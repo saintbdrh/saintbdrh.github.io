@@ -45,9 +45,9 @@ export function createLab(root: HTMLElement, reduced: boolean) {
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
-  camera.position.set(4.6, 3.4, 4.2);
+  camera.position.set(3.3, 2.5, 3.6);
   const controls = new OrbitControls(camera, canvas);
-  controls.target.set(1.0, 1.0, 0);
+  controls.target.set(0.9, 0.95, 0);
   controls.enableZoom = false;
   controls.enablePan = false;
   controls.enableDamping = !reduced;
@@ -113,7 +113,7 @@ export function createLab(root: HTMLElement, reduced: boolean) {
 
   // workspace section
   const wsGeo = new THREE.BufferGeometry();
-  const ws = new THREE.Points(wsGeo, new THREE.PointsMaterial({ color: C.accent, size: 2, sizeAttenuation: false, transparent: true, opacity: 0.32 }));
+  const ws = new THREE.Points(wsGeo, new THREE.PointsMaterial({ color: C.accent, size: 1.5, sizeAttenuation: false, transparent: true, opacity: 0.22 }));
   scene.add(ws);
   let wsKey = '';
 
@@ -177,7 +177,7 @@ export function createLab(root: HTMLElement, reduced: boolean) {
     const key = `${Math.round(pitch)}|${L45}`;
     if (key !== wsKey) {
       wsKey = key;
-      const pts = workspaceSection(Math.round(pitch), L45, 3);
+      const pts = workspaceSection(Math.round(pitch), L45, 4);
       const arr = new Float32Array(pts.length * 3);
       pts.forEach((p, i) => { arr[i * 3] = p.r * S; arr[i * 3 + 1] = p.z * S; arr[i * 3 + 2] = 0; });
       wsGeo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
@@ -227,7 +227,10 @@ export function createLab(root: HTMLElement, reduced: boolean) {
 
   // ------------------------------------------------------------ loop
   let raf = 0, lastT = performance.now(), visible = false;
-  function kick() { if (!raf && visible) raf = requestAnimationFrame(tick); }
+  function kick() {
+    if (!visible) { const r = canvas.getBoundingClientRect(); visible = r.bottom > 0 && r.top < innerHeight; }
+    if (!raf && visible) raf = requestAnimationFrame(tick);
+  }
   function tick(now: number) {
     raf = 0;
     const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
@@ -308,7 +311,9 @@ export function createLab(root: HTMLElement, reduced: boolean) {
     kick();
   }
   new ResizeObserver(resize).observe(canvas);
-  new IntersectionObserver((e) => { visible = e[0].isIntersecting; if (visible) { lastT = performance.now(); kick(); } }).observe(canvas);
+  new IntersectionObserver((e) => { visible = e[e.length - 1].isIntersecting; if (visible) { lastT = performance.now(); kick(); } }).observe(canvas);
   resize();
+  const r0 = canvas.getBoundingClientRect();
+  visible = r0.bottom > 0 && r0.top < innerHeight;
   solve();
 }

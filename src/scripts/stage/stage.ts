@@ -35,7 +35,6 @@ export function createStage(opts: {
   onFail: () => void;
 }): Stage {
   const { canvas, overlay, reduced } = opts;
-  const coarse = matchMedia('(pointer: coarse)').matches;
   const small = Math.min(innerWidth, innerHeight) < 700;
 
   // ------------------------------------------------------------ renderer
@@ -54,13 +53,13 @@ export function createStage(opts: {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = !small;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
 
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environment = envTex;
-  scene.environmentIntensity = 0.32;
+  scene.environmentIntensity = 0.4;
 
   const camera = new THREE.PerspectiveCamera(28, 1, 0.05, 40);
 
@@ -87,7 +86,7 @@ export function createStage(opts: {
   rim2.target.position.set(0.3, 0.8, 0);
   scene.add(rim2, rim2.target);
 
-  const fill = new THREE.HemisphereLight(0xdfe8ee, 0x080a0c, 0.25);
+  const fill = new THREE.HemisphereLight(0xdfe8ee, 0x080a0c, 0.5);
   scene.add(fill);
   const lightLevels = [key.intensity, rim.intensity, rim2.intensity, fill.intensity];
 
@@ -130,6 +129,7 @@ export function createStage(opts: {
   const exploders: { o: THREE.Object3D; rest: THREE.Vector3; e: THREE.Vector3 }[] = [];
   const anchors = new Map<string, THREE.Object3D>();
   const fingers: THREE.Object3D[] = [];
+  let model: THREE.Object3D | null = null;
   let mixer: THREE.AnimationMixer | null = null;
   const axisLines = new THREE.Group();
   scene.add(axisLines);
@@ -145,6 +145,8 @@ export function createStage(opts: {
     '/models/robot.glb',
     (gltf) => {
       const root = gltf.scene;
+      model = root;
+      if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__stage = { root, camera, THREE };
       root.traverse((o) => {
         const m = o as THREE.Mesh;
         if (m.isMesh) {
@@ -207,19 +209,35 @@ export function createStage(opts: {
     resize();
   }
 
+  // Anchor-relative shots: aim at a named part, orbit at (azimuth, elevation, distance).
+  const fp = new THREE.Vector3();
+  const focusCache = new Map<string, THREE.Object3D | null>();
+  function R(s: Shot): Shot {
+    if (!s.focus || !s.orbit || !model) return s;
+    if (!focusCache.has(s.focus)) focusCache.set(s.focus, model.getObjectByName(s.focus) ?? null);
+    const o = focusCache.get(s.focus);
+    if (!o) return s;
+    o.getWorldPosition(fp);
+    const [az, el, d] = s.orbit;
+    const a = THREE.MathUtils.degToRad(az), e = THREE.MathUtils.degToRad(el);
+    const off = s.focusOffset ?? [0, 0, 0];
+    const t: [number, number, number] = [fp.x + off[0], fp.y + off[1], fp.z + off[2]];
+    return { ...s, target: t, cam: [t[0] + Math.sin(a) * Math.cos(e) * d, t[1] + Math.sin(e) * d, t[2] + Math.cos(a) * Math.cos(e) * d] };
+  }
+
   function shotAt(y: number): { shot: Shot; active: Beat | null; t: number } {
     if (!beats.length) return { shot: SHOTS.hero, active: null, t: 0 };
-    if (y <= beats[0].y) return { shot: SHOTS[beats[0].shot], active: beats[0], t: 0 };
+    if (y <= beats[0].y) return { shot: R(SHOTS[beats[0].shot]), active: beats[0], t: 0 };
     for (let i = 0; i < beats.length - 1; i++) {
       const a = beats[i], b = beats[i + 1];
       if (y <= b.y) {
         const t = (y - a.y) / Math.max(1, b.y - a.y);
         const near = t < 0.5 ? a : b;
-        return { shot: mix(SHOTS[a.shot], SHOTS[b.shot], smoother(t)), active: near, t: Math.abs(t - (t < 0.5 ? 0 : 1)) };
+        return { shot: mix(R(SHOTS[a.shot]), R(SHOTS[b.shot]), smoother(t)), active: near, t: Math.abs(t - (t < 0.5 ? 0 : 1)) };
       }
     }
     const last = beats[beats.length - 1];
-    return { shot: SHOTS[last.shot], active: last, t: 0 };
+    return { shot: R(SHOTS[last.shot]), active: last, t: 0 };
   }
 
   // ------------------------------------------------------------ input
@@ -256,7 +274,8 @@ export function createStage(opts: {
   // ------------------------------------------------------------ frame
   let active = true, raf = 0, last = performance.now(), intro0 = 0;
   let frameAvg = 16, slowFor = 0;
-  const cur = { cam: new THREE.Vector3(), target: new THREE.Vector3(), init: false };
+  const cur = { sph: new THREE.Spherical(), target: new THREE.Vector3(), init: false };
+  const goalSph = new THREE.Spherical();
   const qa = new THREE.Quaternion(), qb = new THREE.Quaternion(), qc = new THREE.Quaternion();
   const sph = new THREE.Spherical(), off = new THREE.Vector3(), tmp = new THREE.Vector3();
   let telemetryTick = 0;
@@ -315,12 +334,19 @@ export function createStage(opts: {
 
     // camera: damped toward the shot, plus parallax and touch orbit
     const k = reduced || !cur.init ? 1 : 1 - Math.exp(-dt * 3.2);
-    tmp.set(...shot.cam);
-    if (!cur.init) { cur.cam.copy(tmp); cur.target.set(...shot.target); cur.init = true; }
-    cur.cam.lerp(tmp, k);
-    cur.target.lerp(tmp.set(...shot.target), k);
-    off.copy(cur.cam).sub(cur.target);
-    sph.setFromVector3(off);
+    // damp in spherical coordinates about the target, so large moves orbit the
+    // robot instead of cutting through it
+    tmp.set(...shot.target);
+    off.set(...shot.cam).sub(tmp);
+    goalSph.setFromVector3(off);
+    if (!cur.init) { cur.target.copy(tmp); cur.sph.copy(goalSph); cur.init = true; }
+    cur.target.lerp(tmp, k);
+    let dTheta = goalSph.theta - cur.sph.theta;
+    dTheta = Math.atan2(Math.sin(dTheta), Math.cos(dTheta));
+    cur.sph.theta += dTheta * k;
+    cur.sph.phi += (goalSph.phi - cur.sph.phi) * k;
+    cur.sph.radius += (goalSph.radius - cur.sph.radius) * k;
+    sph.copy(cur.sph);
     sph.radius *= 1 + (1 - ease) * 0.45;
     sph.theta += (1 - ease) * 0.35;
     if (!reduced) {
@@ -348,13 +374,14 @@ export function createStage(opts: {
         const a = AXES[i];
         const s2 = j.quaternion.x * a.x + j.quaternion.y * a.y + j.quaternion.z * a.z;
         const ang = THREE.MathUtils.radToDeg(2 * Math.atan2(s2, j.quaternion.w));
-        return `${(ang < -0.05 ? '−' : ' ') + Math.abs(ang).toFixed(1).padStart(5, ' ')}°`;
+        return `${(ang < -0.05 ? '−' : '') + Math.abs(ang).toFixed(1)}°`;
       });
       opts.telemetry.querySelectorAll('[data-j]').forEach((el, i) => { el.textContent = out[i]; });
     }
 
     const settling = !reduced && (ti < 1 || light < 1);
-    const moving = cur.cam.distanceToSquared(tmp.set(...shot.cam)) > 1e-6 ||
+    const moving = Math.abs(goalSph.radius - cur.sph.radius) + Math.abs(goalSph.phi - cur.sph.phi) > 1e-4 ||
+      cur.target.distanceToSquared(tmp.set(...shot.target)) > 1e-7 ||
       pointerS.distanceToSquared(pointer) > 1e-6 || Math.abs(drag.s) > 1e-4;
     if (active && (heroW > 0.001 || settling || moving)) requestFrame();
   }
