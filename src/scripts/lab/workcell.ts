@@ -294,4 +294,5 @@ export function createWorkcell() {
   setState('Idle');
   updateButtons();
   draw();
+  requestAnimationFrame(frame);
 }
