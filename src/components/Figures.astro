@@ -1,0 +1,157 @@
+---
+/**
+ * Project figures, drawn as line work in the site's palette. Each figure
+ * depicts the documented architecture or method; none shows invented data.
+ */
+interface Props { kind: 'homography' | 'gesture' | 'greenhouse' | 'conveyor'; title: string }
+const { kind, title } = Astro.props;
+
+// MediaPipe hand: 21 landmarks (wrist, then 4 per finger). Schematic open palm.
+const hand: [number, number][] = [
+  [150, 250],
+  [118, 232], [96, 206], [82, 182], [70, 160],          // thumb 1-4
+  [128, 168], [124, 128], [122, 102], [120, 80],        // index 5-8
+  [150, 162], [150, 118], [150, 90], [150, 66],         // middle 9-12
+  [172, 166], [176, 126], [178, 100], [180, 80],        // ring 13-16
+  [192, 178], [202, 148], [208, 128], [212, 110],       // pinky 17-20
+];
+const bones = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[0,17],[17,18],[18,19],[19,20]];
+const tips = [8, 12, 16, 20];
+---
+<figure class={`fig fig-${kind}`}>
+  {kind === 'homography' && (
+    <svg viewBox="0 0 560 300" role="img" aria-labelledby="fh-t">
+      <title id="fh-t">{title}</title>
+      <g class="f-frame">
+        <rect x="16" y="40" width="230" height="170" rx="3" />
+        <text class="f-label" x="16" y="28">Camera image, pixels</text>
+      </g>
+      <path class="f-plane" d="M58 186 L204 186 L180 82 L84 82 Z" />
+      <g class="f-grid">
+        <path d="M70.5 134 H192 M76 108 H186 M63 160 H198 M107 186 L119 82 M131 186 L131 82 M155 186 L143 82 M83 186 L107 82 M179 186 L155 82" />
+      </g>
+      {[[58,186],[204,186],[180,82],[84,82]].map(([x,y]) => (
+        <g class="f-tag" transform={`translate(${x - 7} ${y - 7})`}><rect width="14" height="14" /><rect x="4" y="4" width="6" height="6" class="f-tag-in" /></g>
+      ))}
+      <ellipse class="f-object" cx="146" cy="128" rx="10" ry="7" />
+      <path class="f-cross" d="M146 116 V140 M134 128 H158" />
+
+      <g class="f-arrow">
+        <path class="f-wire" d="M262 125 H318" />
+        <path d="M312 119 L320 125 L312 131" />
+        <text class="f-label f-mid" x="290" y="112">H, 3×3</text>
+      </g>
+
+      <g class="f-frame">
+        <rect x="334" y="40" width="210" height="170" rx="3" />
+        <text class="f-label" x="334" y="28">Workspace plane, mm</text>
+      </g>
+      <g class="f-grid">
+        {[0,1,2,3,4,5,6].map((i) => <path d={`M${354 + i * 28} 60 V190`} />)}
+        {[0,1,2,3,4].map((i) => <path d={`M354 ${60 + i * 32.5} H522`} />)}
+      </g>
+      {[[354,190],[522,190],[522,60],[354,60]].map(([x,y]) => (
+        <g class="f-tag" transform={`translate(${x - 7} ${y - 7})`}><rect width="14" height="14" /><rect x="4" y="4" width="6" height="6" class="f-tag-in" /></g>
+      ))}
+      <circle class="f-object" cx="452" cy="118" r="9" />
+      <path class="f-cross" d="M452 104 V132 M438 118 H466" />
+      <text class="f-data" x="466" y="104">(x, y)</text>
+      <path class="f-dim" d="M354 222 H522 M354 217 V227 M522 217 V227" />
+      <text class="f-label f-mid" x="438" y="244">AprilTag-anchored frame</text>
+      <text class="f-label" x="16" y="244">HSV mask → centroid → homography → XYZ target</text>
+      <text class="f-data" x="16" y="272">mean calibration error 2.8 mm</text>
+    </svg>
+  )}
+
+  {kind === 'gesture' && (
+    <div class="fig-gesture-in">
+      <svg viewBox="40 40 220 240" role="img" aria-labelledby="fg-t">
+        <title id="fg-t">{title}</title>
+        <g class="f-bones">
+          {bones.map(([a, b]) => <path d={`M${hand[a][0]} ${hand[a][1]} L${hand[b][0]} ${hand[b][1]}`} />)}
+        </g>
+        {tips.map((t, i) => <path class="f-pinch" style={`--i:${i}`} d={`M${hand[4][0]} ${hand[4][1]} L${hand[t][0]} ${hand[t][1]}`} />)}
+        {hand.map(([x, y], i) => <circle class={i === 4 || tips.includes(i) ? 'f-node f-tip' : 'f-node'} cx={x} cy={y} r={i === 0 ? 4 : 3} />)}
+        <path class="f-dim" d="M64 272 H236 M64 266 V278 M236 266 V278" />
+        <text class="f-label f-mid" x="150" y="262">lateral position → base</text>
+      </svg>
+      <dl class="gesture-map">
+        <div><dt>Hand left / right</dt><dd>Base rotation</dd></div>
+        <div><dt>Thumb + index</dt><dd>Shoulder forward</dd></div>
+        <div><dt>Thumb + middle</dt><dd>Elbow down</dd></div>
+        <div><dt>Thumb + ring</dt><dd>Wrist down</dd></div>
+        <div><dt>Thumb + pinky touch</dt><dd>Gripper open</dd></div>
+        <div><dt>Thumb + pinky apart</dt><dd>Gripper close</dd></div>
+      </dl>
+    </div>
+  )}
+
+  {kind === 'greenhouse' && (
+    <svg viewBox="0 0 560 320" role="img" aria-labelledby="fgh-t">
+      <title id="fgh-t">{title}</title>
+      <g class="f-house">
+        <path d="M24 270 V142 L150 64 L276 142 V270 Z" />
+        <path d="M150 64 V270" class="f-faint" />
+        <path d="M24 142 H276" class="f-faint" />
+        <path d="M40 270 V244 H260 V270" class="f-bed" />
+      </g>
+      <g class="f-sensor"><circle cx="84" cy="176" r="5" /><text class="f-label" x="94" y="180">DHT22 air temp., humidity</text></g>
+      <g class="f-sensor"><circle cx="150" cy="96" r="5" /><text class="f-label" x="160" y="100">LDR light</text></g>
+      <g class="f-sensor"><path d="M210 236 V262" /><circle cx="210" cy="232" r="4" /><text class="f-label" x="140" y="226">Soil probe</text></g>
+      <g class="f-act"><rect x="230" y="160" width="30" height="30" rx="15" /><text class="f-label f-end" x="224" y="170">Fan</text></g>
+      <g class="f-act"><rect x="44" y="212" width="38" height="16" rx="2" /><text class="f-label" x="88" y="224">Pump</text></g>
+      <g class="f-act"><path d="M110 132 H190" /><text class="f-label f-mid" x="150" y="126">Grow lights</text></g>
+
+      <g class="f-node-box"><rect x="98" y="194" width="104" height="34" rx="3" /><text class="f-label f-mid f-strong" x="150" y="215">ESP32 #2 node</text></g>
+
+      <path class="f-wire f-flow" d="M202 211 H330" />
+      <path class="f-wire f-flow f-rev" d="M330 219 H202" />
+      <text class="f-data f-mid" x="266" y="202">ESP-NOW</text>
+
+      <g class="f-node-box"><rect x="330" y="192" width="112" height="44" rx="3" /><text class="f-label f-mid f-strong" x="386" y="212">ESP32 #1 hub</text><text class="f-label f-mid" x="386" y="228">control logic</text></g>
+
+      <path class="f-wire f-flow" d="M386 192 V120" />
+      <text class="f-data" x="394" y="160">Wi-Fi</text>
+      <g class="f-node-box f-ext"><rect x="318" y="72" width="136" height="48" rx="3" /><text class="f-label f-mid f-strong" x="386" y="94">Web dashboard</text><text class="f-label f-mid" x="386" y="110">HTML, CSS, JS</text></g>
+
+      <path class="f-wire f-flow" d="M442 214 H500 V120" />
+      <g class="f-node-box f-ext"><rect x="466" y="72" width="80" height="48" rx="3" /><text class="f-label f-mid f-strong" x="506" y="94">Telegram</text><text class="f-label f-mid" x="506" y="110">alerts</text></g>
+      <text class="f-label" x="24" y="300">Field node in the greenhouse; hub with the operators. Schematic, not to scale.</text>
+    </svg>
+  )}
+
+  {kind === 'conveyor' && (
+    <svg viewBox="0 0 560 330" role="img" aria-labelledby="fc-t">
+      <title id="fc-t">{title}</title>
+      <text class="f-label f-strong" x="16" y="30">Interlock layer</text>
+      <g class="f-node-box"><rect x="16" y="44" width="120" height="44" rx="3" /><text class="f-label f-mid" x="76" y="64">E-stop,</text><text class="f-label f-mid" x="76" y="79">light curtains</text></g>
+      <path class="f-wire f-flow" d="M136 66 H178" />
+      <g class="f-node-box"><rect x="178" y="44" width="148" height="44" rx="3" /><text class="f-label f-mid f-strong" x="252" y="64">Siemens S7-1200</text><text class="f-label f-mid" x="252" y="79">ladder logic, safety relays</text></g>
+
+      <text class="f-label f-strong" x="16" y="134">Vision layer</text>
+      <g class="f-node-box"><rect x="16" y="148" width="120" height="44" rx="3" /><text class="f-label f-mid" x="76" y="175">Camera</text></g>
+      <path class="f-wire f-flow" d="M136 170 H178" />
+      <g class="f-node-box"><rect x="178" y="148" width="148" height="44" rx="3" /><text class="f-label f-mid f-strong" x="252" y="168">Embedded IPC, OpenCV</text><text class="f-label f-mid" x="252" y="183">proximity, intrusion, misalignment</text></g>
+
+      <path class="f-wire f-flow" d="M326 66 H372 V104 H392" />
+      <path class="f-wire f-flow" d="M326 170 H372 V132 H392" />
+      <path class="f-gate" d="M392 96 Q418 96 430 118 Q418 140 392 140 Q404 118 392 96 Z" />
+      <text class="f-data f-mid" x="410" y="160">OR</text>
+      <path class="f-wire f-stop" d="M430 118 H466" />
+      <g class="f-node-box f-key"><rect x="466" y="96" width="80" height="44" rx="3" /><text class="f-label f-mid f-strong" x="506" y="116">Stop</text><text class="f-data f-mid" x="506" y="131">&lt; 50 ms</text></g>
+
+      <g class="f-node-box f-ext"><rect x="178" y="226" width="148" height="40" rx="3" /><text class="f-label f-mid f-strong" x="252" y="244">HMI panel</text><text class="f-label f-mid" x="252" y="258">status, event log</text></g>
+      <path class="f-wire f-faint" d="M240 88 V226" />
+      <path class="f-wire f-faint" d="M264 226 V88" />
+
+      <g class="f-belt">
+        <circle cx="396" cy="270" r="14" /><circle cx="530" cy="270" r="14" />
+        <path d="M396 256 H530 M396 284 H530" />
+        <path class="f-belt-move" d="M396 256 H530" />
+      </g>
+      <path class="f-wire f-stop" d="M506 140 V252" />
+      <text class="f-label" x="396" y="310">Conveyor drive</text>
+    </svg>
+  )}
+  <slot />
+</figure>
