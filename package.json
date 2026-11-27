@@ -9,8 +9,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "test": "node --test tests/*.test.ts",
-    "model": "blender -b --factory-startup -P blender/build_robot.py -- . --no-render",
-    "renders": "blender -b --factory-startup -P blender/build_robot.py -- ."
+    "model": "blender -b --factory-startup -P blender/build_dofbot.py -- . --no-render",
+    "renders": "blender -b --factory-startup -P blender/build_dofbot.py -- ."
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@types/node": "^24.19.4",
     "@types/three": "^0.187.0",
     "astro": "^7.4.13",
     "typescript": "^5.9.3"

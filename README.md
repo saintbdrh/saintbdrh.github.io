@@ -1,10 +1,10 @@
 # saintbdrh.github.io
 
-Portfolio of **D. Uuganbadrakh**, electronics engineer: a scroll-driven WebGL study of an original six-axis robot arm, four engineering projects, and an Engineering Lab that runs the inverse-kinematics solver from his thesis.
+Portfolio of **D. Uuganbadrakh**, electronics engineer, built as one continuous 3D world: a model of his thesis robot (a Yahboom DOFBOT) sorts blocks with his real inverse-kinematics solver. A scroll-driven camera flies through the RealSense view, the kinematics, project screens arranged around the robot, and a lab where visitors drive the arm.
 
 Live: https://saintbdrh.github.io/
 
-![Hero render](docs/renders/01-hero.png)
+![DOFBOT render](docs/renders/dofbot.png)
 
 ## Stack
 
@@ -13,7 +13,7 @@ Live: https://saintbdrh.github.io/
 | Site | [Astro](https://astro.build) 7, TypeScript, static output |
 | 3D | three.js, Draco-compressed glTF |
 | Motion | GSAP ScrollTrigger (reveals), Lenis (smooth scroll), custom camera choreography |
-| Assets | Blender 5.2, procedural `bpy` script (no third-party models) |
+| Assets | Blender 5.2, procedural `bpy` script modelled on the measured DOFBOT link lengths (no third-party models) |
 | Fonts | Geist, Geist Mono, Source Serif 4, self-hosted via Fontsource |
 | Hosting | GitHub Pages via GitHub Actions |
 
@@ -30,34 +30,34 @@ npm run preview
 Rebuild the robot model (requires Blender on `PATH`):
 
 ```sh
-npm run model      # writes public/models/robot.glb
+npm run model      # writes public/models/dofbot.glb
 npm run renders    # also writes docs/renders/*.png
 ```
 
 ## Structure
 
 ```
-blender/build_robot.py        procedural six-axis arm, materials, studio, baked "Survey" clip, GLB export
-public/models/robot.glb       exported model (Draco, ~250 KB, ~38k triangles)
-public/draco/                 Draco decoder (from three/examples)
+blender/build_dofbot.py       procedural DOFBOT-style arm (L1 90, L2 83, L3 83, L4 79.6, L5 102.7 mm) + RealSense on a stand
+public/models/dofbot.glb      exported model (Draco, ~150 KB, ~26k triangles)
 src/data/content.ts           every factual claim on the site, in one place
-src/components/               Film (hero, engineering, thesis), Projects, Figures, Lab, Profile
-src/scripts/main.ts           bootstrap: Lenis, reveals, nav, lazy stage and lab
-src/scripts/stage/            WebGL stage and scroll choreography (anchor-relative shots)
+src/components/World.astro    the scenes: hero, vision, kinematics, project screens + case-study dialogs, lab
+src/components/Profile.astro  capability map, profile, contact
+src/scripts/world/world.ts    the single 3D world: studio, workspace, blocks, scroll camera, CSS3D screens, overlays
+src/scripts/world/arm.ts      maps thesis joint angles onto the model; joint-space motion
 src/scripts/lab/ik.ts         port of the thesis IK (ik_core.py), pure functions
-src/scripts/lab/lab3d.ts      3D view of the DOFBOT chain driven by ik.ts
 src/scripts/lab/workcell.ts   planar workcell demo carried over from the previous site
 tests/ik.test.ts              FK/IK round-trip, joint limits, thesis pick sequence
-DESIGN.md, PRODUCT.md         design system and product record
 ```
 
-## How the scroll film works
+## How the world works
 
-Every section that drives the camera carries `data-shot="<name>"`. The stage measures where each one crosses the viewport centre and blends between consecutive shots defined in `src/scripts/stage/choreography.ts`. Shots are anchor-relative: they name a node of the model (`A_shoulder`, `A_camera`, …) and an orbit (azimuth, elevation, distance). Interpolation and damping happen in spherical coordinates, so the camera orbits the arm instead of cutting through it.
+Every scene section carries `data-shot="<name>"`. The world measures where each crosses the viewport centre and blends the camera between neighbouring shots in spherical coordinates, so it orbits rather than cutting through the scene. On screens at least 1000 px wide, the project panels are moved into a CSS3D layer and float in a ring around the robot. Narrower screens keep them in the page flow.
+
+The arm runs the thesis method live: each pick is solved with `solveHover` (nominal L4+L5 tool length), and the move is interpolated in joint space at a servo-like speed limit.
 
 ## Honesty notes
 
-- The six-axis arm is an **original illustrative model**, not the thesis hardware (a Yahboom DOFBOT). The page says so.
+- The arm is a **stylised model of the thesis DOFBOT**, built to its measured link lengths, not Yahboom's CAD. The RealSense detections in the vision scene are computed from the simulated scene, and the page says so.
 - The Lab is a **simulation**. It uses the measured DOFBOT link lengths and joint limits from [`config.py`](https://github.com/saintbdrh/Vision-guided-robot-sorting/blob/main/config.py) and the solver logic from `ik_core.py`.
 - Project figures are architecture and method diagrams. They show no invented readings.
 
