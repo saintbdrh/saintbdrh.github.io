@@ -89,7 +89,7 @@ components:
 
 ## Overview
 
-A product-visualization film of one machine. The page is a dark studio: an original six-axis arm, lit like an industrial product commercial, sits on a fixed WebGL stage while editorial text scrolls over it. The camera's path is the narrative. Once the visitor reaches the editorial work, the stage gives way to calm, opaque sections ruled with hairlines. Nothing glows, flickers or bounces. The interface steps back and the machine and the engineering carry the page.
+One continuous 3D world. The page is a dark studio: a model of the thesis DOFBOT sorts blocks on its workspace mat with the real IK solver, while the scroll-driven camera travels through the RealSense view, the kinematics, project screens floating in a ring around the robot, and a lab where visitors drive the arm. Nothing glows, flickers or bounces. The interface steps back and the machine and the engineering carry the page.
 
 Character: calm, exact, Japanese-spatial, industrial. Asymmetric twelve-column editorial layouts, generous negative space, one cool accent.
 
@@ -145,7 +145,7 @@ Near-square: 2px for controls, 3px for panels and figures. Circles only for join
 
 ## Do's and Don'ts
 
-- Do let the arm lead the first viewport; keep the name at lower left.
+- Do let the DOFBOT, working, lead the first viewport; keep the name at lower left.
 - Do move the camera by orbiting around a named part of the model (anchor-relative shots, spherical interpolation).
 - Do label every simulation and the illustrative model as such.
 - Don't use glitch, scanlines, RGB split, neon glow, glass cards, particles or typewriter text (owner bans).

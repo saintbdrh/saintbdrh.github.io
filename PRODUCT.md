@@ -30,10 +30,10 @@ Visitors arrive from a CV, LinkedIn or GitHub link, often on desktop, sometimes 
 
 ## Capabilities and Constraints
 
-- Single-page site. Sections: hero, engineering capabilities, robotics thesis, selected projects, Engineering Lab, about, contact.
+- Single-page site built as one continuous 3D world (owner decision, 2026-11-27, after reviewing fojcikdominik.com): hero, vision, kinematics, project screens, Engineering Lab, profile, contact. Clean look: no CRT, glitch or scanlines.
 - Must keep: the interactive workcell sorting demo (geometric IK), the project details, the capability map (skill ↔ project), copy-email, Save as PDF (print stylesheet), JSON-LD Person data, OG image, keyboard and screen-reader access, `prefers-reduced-motion` support.
 - Dark-only theme (owner decision, 2026-11-23); the old light/dark toggle is retired. Print output stays light.
-- The hero robot is an illustrative, original six-axis industrial model, **not** the thesis hardware. The thesis hardware is a Yahboom DOFBOT. The site must say so wherever it could be confused.
+- The robot in the 3D world is a stylised model of the thesis Yahboom DOFBOT, built to its measured link lengths (owner decision, 2026-11-27). Every motion on the site is simulated and labelled as such.
 - Simulations are always labeled as simulations; no physical-hardware demonstration exists on the site.
 
 ## Brand Commitments

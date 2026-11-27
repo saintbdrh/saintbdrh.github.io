@@ -1,6 +1,6 @@
 /**
- * Page bootstrap: smooth scroll, reveals, navigation, WebGL stage, lab, utilities.
- * Everything here is progressive: content is readable without any of it.
+ * Page bootstrap: smooth scroll, reveals, navigation, the 3D world, the lab,
+ * dialogs and utilities. Everything is progressive: content reads without it.
  */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -47,7 +47,7 @@ document.addEventListener('click', (e) => {
   if (!el) return;
   e.preventDefault();
   closeMenu();
-  if (lenis) lenis.scrollTo(id === '#top' ? 0 : el, { offset: id === '#top' ? 0 : -64, duration: 1.6 });
+  if (lenis) lenis.scrollTo(id === '#top' ? 0 : el, { offset: id === '#top' ? 0 : -64, duration: 1.8 });
   else if (id === '#top') window.scrollTo({ top: 0 });
   else el.scrollIntoView();
   history.replaceState(null, '', id);
@@ -81,10 +81,11 @@ if (!reduced) {
   });
 }
 
-// ------------------------------------------------------------ stage
-const canvas = document.getElementById('stage-canvas') as HTMLCanvasElement;
-const overlay = document.getElementById('stage-ann') as unknown as SVGSVGElement;
-const stageEl = canvas.parentElement!;
+// ------------------------------------------------------------ world
+const canvas = document.getElementById('world-canvas') as HTMLCanvasElement;
+const cssLayer = document.getElementById('world-css') as HTMLElement;
+const overlay = document.getElementById('world-ann') as unknown as SVGSVGElement;
+const worldEl = canvas.parentElement!;
 const introEls = Array.from(document.querySelectorAll<HTMLElement>('[data-intro]'));
 let introDone = false;
 
@@ -92,10 +93,11 @@ function introText() {
   if (introDone) return;
   introDone = true;
   if (reduced) return;
-  gsap.fromTo(introEls, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 1.6, ease: 'expo.out', stagger: 0.14, delay: 0.6 });
+  gsap.fromTo(introEls, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 1.6, ease: 'expo.out', stagger: 0.12, delay: 0.5 });
 }
 function fallback() {
   root.classList.add('no-webgl');
+  root.classList.remove('panels-3d');
   introText();
 }
 function hasWebGL() {
@@ -105,48 +107,120 @@ function hasWebGL() {
   } catch { return false; }
 }
 
-if (hasWebGL()) {
+// project screens live inside the 3D world on wide screens; elsewhere they stay in the page flow
+const webgl = hasWebGL();
+const panels3d = webgl && innerWidth >= 1000 && innerHeight >= 560;
+root.classList.toggle('panels-3d', panels3d);
+
+if (webgl) {
   if (!reduced) gsap.set(introEls, { autoAlpha: 0 });
-  // never hold the name hostage to a slow model download
-  setTimeout(introText, 2600);
-  import('./stage/stage').then(({ createStage }) => {
-    const stage = createStage({
-      canvas, overlay, reduced, scrollY,
-      telemetry: document.getElementById('telemetry'),
-      onReady: () => { stageEl.classList.add('ready'); introText(); },
+  setTimeout(introText, 2600); // never hold the name hostage to a slow model download
+  import('./world/world').then(({ createWorld }) => {
+    const world = createWorld({
+      canvas, cssLayer, overlay, reduced, panels3d, scrollY,
+      onReady: () => { worldEl.classList.add('ready'); introText(); },
       onFail: fallback,
     });
-    // render only while the film or the contact scene can be seen
-    const visible = new Set<Element>();
+    // dim the world behind the long reading sections
+    const reading = new Set<Element>();
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => (en.isIntersecting ? visible.add(en.target) : visible.delete(en.target)));
-      const on = visible.size > 0;
-      stageEl.classList.toggle('off', !on);
-      stage.setActive(on);
-    });
-    ['film', 'contact'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
-    const remeasure = () => stage.measure();
+      entries.forEach((en) => (en.intersectionRatio > 0.5 ? reading.add(en.target) : reading.delete(en.target)));
+      worldEl.classList.toggle('dim', reading.size > 0);
+    }, { threshold: [0, 0.5, 1] });
+    ['skills', 'profile'].forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    const remeasure = () => world.measure();
     document.fonts?.ready.then(remeasure);
     addEventListener('load', remeasure);
     ScrollTrigger.addEventListener('refresh', remeasure);
-    addEventListener('pagehide', () => stage.dispose(), { once: true });
+    document.addEventListener('visibilitychange', () => world.setActive(!document.hidden));
+    addEventListener('pagehide', () => world.dispose(), { once: true });
+    initLab();
   }).catch(fallback);
 } else {
   fallback();
 }
 
-// ------------------------------------------------------------ lab (lazy)
-const lab = document.getElementById('lab-ik');
-if (lab) {
-  const io = new IntersectionObserver((entries, obs) => {
-    if (!entries[0].isIntersecting) return;
-    obs.disconnect();
-    if (hasWebGL()) import('./lab/lab3d').then(({ createLab }) => createLab(lab, reduced));
-    else lab.classList.add('no-webgl');
-    import('./lab/workcell').then(({ createWorkcell }) => createWorkcell());
-  }, { rootMargin: '800px 0px' });
-  io.observe(lab);
+// ------------------------------------------------------------ lab: drives the same arm in the world
+interface LabApi {
+  setTarget(x: number, y: number, z: number, pitch: number): { ok: boolean; branch?: string; pitch: number; D: number; candidates: unknown[] };
+  setJoints(q1: number, q2: number, q3: number, q4: number): { x: number; y: number; z: number; pitch: number };
+  setEffective(on: boolean): void;
+  runSequence(onStep: (label: string, ok: boolean) => void): void;
 }
+function initLab() {
+  const api = (window as unknown as { __labApi?: LabApi }).__labApi;
+  const panel = document.getElementById('lab-panel');
+  if (!api || !panel) return;
+  const status = panel.querySelector<HTMLElement>('#lab-status')!;
+  const ikIn = panel.querySelector<HTMLElement>('#lab-ik-inputs')!;
+  const fkIn = panel.querySelector<HTMLElement>('#lab-fk-inputs')!;
+  let mode: 'ik' | 'fk' = 'ik';
+  const val = (fs: HTMLElement, k: string) => Number(fs.querySelector<HTMLInputElement>(`[data-k="${k}"]`)!.value);
+  const sync = (inp: HTMLInputElement) => {
+    const out = inp.parentElement!.querySelector('output')!;
+    const v = Number(inp.value), u = out.dataset.unit || '';
+    out.textContent = `${v < 0 ? '−' : ''}${Math.abs(v)}${u === '°' ? '°' : ' ' + u}`;
+  };
+  const fmt = (v: number) => `${v < -0.05 ? '−' : ''}${Math.abs(v).toFixed(1)}`;
+  function apply() {
+    api!.setEffective(false);
+    if (mode === 'ik') {
+      const s = api!.setTarget(val(ikIn, 'x'), val(ikIn, 'y'), val(ikIn, 'z'), val(ikIn, 'pitch'));
+      status.dataset.state = s.ok ? 'ok' : 'warn';
+      status.textContent = s.ok
+        ? `Solved on the ${s.branch} branch at pitch ${fmt(s.pitch)}°.`
+        : s.candidates.length ? 'Reachable, but no elbow branch stays within the joint limits.' : `Out of reach: D = ${s.D.toFixed(3)}, outside [−1, 1].`;
+    } else {
+      const p = api!.setJoints(val(fkIn, 'q1'), val(fkIn, 'q2'), val(fkIn, 'q3'), val(fkIn, 'q4'));
+      status.dataset.state = 'ok';
+      status.textContent = `Forward kinematics: gripper tip at (${fmt(p.x)}, ${fmt(p.y)}, ${fmt(p.z)}) mm, pitch ${fmt(p.pitch)}°.`;
+    }
+  }
+  panel.querySelectorAll<HTMLInputElement>('input[type="range"]').forEach((inp) => {
+    sync(inp);
+    inp.addEventListener('input', () => { sync(inp); apply(); });
+  });
+  panel.querySelectorAll<HTMLInputElement>('input[name="lab-mode"]').forEach((r) => r.addEventListener('change', () => {
+    mode = r.value as 'ik' | 'fk';
+    ikIn.hidden = mode !== 'ik';
+    fkIn.hidden = mode !== 'fk';
+    apply();
+  }));
+  const runBtn = panel.querySelector<HTMLButtonElement>('#lab-run')!;
+  runBtn.addEventListener('click', () => {
+    runBtn.disabled = true;
+    api!.runSequence((label, ok) => {
+      status.dataset.state = ok ? 'ok' : 'warn';
+      if (label === 'Sequence complete') {
+        status.textContent = 'Sequence complete: picked at (150, 50), placed at (120, −40), using the thesis 40 mm effective wrist.';
+        runBtn.disabled = false;
+      } else status.textContent = `${label}${ok ? '' : ', no solution'}.`;
+    });
+  });
+  // take control as soon as the lab scene is reached
+  new IntersectionObserver((en) => { if (en[0].isIntersecting) apply(); }, { threshold: 0.5 }).observe(document.getElementById('lab')!);
+}
+
+// ------------------------------------------------------------ dialogs (case studies, workcell)
+let workcellReady = false;
+document.addEventListener('click', (e) => {
+  const t = e.target as HTMLElement;
+  const opener = t.closest<HTMLElement>('[data-open]');
+  if (opener) {
+    const d = document.getElementById(opener.dataset.open!) as HTMLDialogElement | null;
+    if (!d) return;
+    d.showModal();
+    lenis?.stop();
+    if (d.id === 'workcell-dialog' && !workcellReady) {
+      workcellReady = true;
+      import('./lab/workcell').then(({ createWorkcell }) => createWorkcell());
+    }
+    return;
+  }
+  if (t.closest('[data-close]')) t.closest('dialog')?.close();
+  else if (t.tagName === 'DIALOG') (t as HTMLDialogElement).close(); // click on the backdrop
+});
+document.querySelectorAll('dialog').forEach((d) => d.addEventListener('close', () => lenis?.start()));
 
 // ------------------------------------------------------------ capability map, copy, print
 initCapabilityMap(reduced);
