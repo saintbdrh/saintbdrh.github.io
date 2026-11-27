@@ -14,6 +14,7 @@ import { person, capabilities, thesis } from '../data/content';
             <div><dt>{j}</dt><dd data-j>  0.0°</dd></div>
           ))}
         </dl>
+        <p class="hero-note">Joint angles of an original, illustrative six-axis model, not the thesis hardware.</p>
       </div>
       <a class="scroll-cue" href="#engineering" data-intro>
         <span>Scroll</span><i aria-hidden="true"></i>
@@ -54,9 +55,8 @@ import { person, capabilities, thesis } from '../data/content';
     <ol class="pipeline wrap" aria-label="Thesis pipeline, in signal order">
       {thesis.stages.map((s, i) => (
         <li class="stage-step" data-shot={['thesis-a', 'thesis-a', 'thesis-b', 'thesis-b', 'thesis-c', 'thesis-c'][i]} data-reveal>
-          <p class="step-k">{s.k}</p>
           <h3 class="h4">{s.title}</h3>
-          <p>{s.text}</p>
+          <p><span class="step-k">{s.k}.</span> {s.text}</p>
         </li>
       ))}
     </ol>

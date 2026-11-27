@@ -19,7 +19,7 @@
   --font-ui: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Source Serif 4 Variable', 'Iowan Old Style', Georgia, serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-  --fs-hero: clamp(3.1rem, 7vw, 6rem);
+  --fs-hero: clamp(2.5rem, 7vw, 6rem);
   --fs-h2: clamp(2.2rem, 4.3vw, 4rem);
   --fs-h3: clamp(1.75rem, 2.7vw, 2.6rem);
   --fs-h4: 1.25rem;
@@ -147,6 +147,8 @@ main, .footer { position: relative; z-index: 1; }
 .nav-links a[aria-current]::after { content: ''; position: absolute; left: 50%; bottom: 8px; width: 3px; height: 3px; margin-left: -1.5px; border-radius: 50%; background: var(--accent); }
 .nav-contact { color: var(--text) !important; border: 1px solid var(--rule-2); border-radius: 2px; margin-left: var(--s3); min-height: 36px !important; }
 .nav-contact:hover { border-color: var(--text-2); }
+.hero-note { margin-top: var(--s3); font-size: 0.75rem; color: var(--text-2); }
+.nav-mail { display: none; }
 .nav-menu { display: none; min-height: 44px; padding: 0 var(--s4); background: none; border: 1px solid var(--rule-2); border-radius: 2px; cursor: pointer; font-size: var(--fs-small); }
 .nav-progress { position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(var(--progress, 0)); opacity: 0.8; }
 
@@ -169,7 +171,7 @@ main, .footer { position: relative; z-index: 1; }
 /* ------------------------------------------------------------ Scenes 02-03: chapters over the stage */
 .chapter-head { padding-top: var(--section); padding-bottom: var(--s9); display: grid; gap: var(--s5); }
 .chapter-head .h2 { max-width: 15ch; }
-.caps .cap { min-height: 92vh; display: flex; align-items: center; }
+.caps .cap { min-height: 78vh; display: flex; align-items: center; }
 .cap-text { max-width: 27rem; display: grid; gap: var(--s4); }
 .cap-text p { color: var(--text-2); }
 .cap-text .cap-part { color: var(--accent); }
@@ -180,9 +182,9 @@ main, .footer { position: relative; z-index: 1; }
 .stat-label { font-size: var(--fs-small); color: var(--text-2); max-width: 30ch; }
 .pipeline { position: relative; }
 .pipeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(max(var(--margin), calc(50% + var(--gutter))) + 3px); width: 1px; background: linear-gradient(var(--accent), var(--rule) 70%); }
-.stage-step { position: relative; min-height: 46vh; padding: var(--s7) 0 var(--s7) var(--s7); display: flex; flex-direction: column; justify-content: center; gap: var(--s2); max-width: 32rem; }
+.stage-step { position: relative; min-height: 40vh; padding: var(--s7) 0 var(--s7) var(--s7); display: flex; flex-direction: column; justify-content: center; gap: var(--s2); max-width: 32rem; }
 .stage-step::before { content: ''; position: absolute; left: 0; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--bg); border: 1px solid var(--accent); }
-.step-k { font-size: var(--fs-small); color: var(--accent); }
+.step-k { color: var(--accent); }
 .stage-step p:last-child { color: var(--text-2); }
 .thesis-more { padding-block: var(--s7) var(--section); }
 
@@ -434,6 +436,8 @@ select { min-height: 40px; padding: 0 var(--s3); background: var(--bg); border: 
 }
 @media (max-width: 960px) {
   .nav-menu { display: inline-flex; align-items: center; }
+  .nav-mail { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s3); font-size: var(--fs-small); text-decoration: none; }
+  .nav-links .nav-contact { display: none; }
   .nav nav { position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--rule); display: none; }
   .nav.open nav { display: block; }
   .nav.open { background: var(--bg); }
@@ -450,8 +454,8 @@ select { min-height: 40px; padding: 0 var(--s3); background: var(--bg); border: 
   .telemetry { gap: var(--s2) var(--s4); }
 }
 @media (max-aspect-ratio: 1/1), (max-width: 760px) {
-  .caps .cap, .stage-step { align-items: flex-end; }
-  .caps .cap { min-height: 100svh; padding-bottom: 12vh; }
+  .caps .cap { align-items: flex-end; }
+  .caps .cap { min-height: 88svh; padding-bottom: 10vh; }
   .cap-text, .stage-step > *, .chapter-head, .contact-in { position: relative; }
   .cap-text { padding: var(--s5); margin-inline: calc(var(--s5) * -1); background: rgba(8, 10, 12, 0.82); }
   .stage-step { min-height: 70svh; justify-content: flex-end; padding-bottom: 8vh; }

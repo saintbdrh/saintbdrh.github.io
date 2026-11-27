@@ -98,7 +98,7 @@ export function adapt(shot: Shot, aspect: number): Shot {
     t[1] + (shot.cam[1] - t[1]) * k + 0.1,
     t[2] + (shot.cam[2] - t[2]) * k,
   ];
-  return { ...shot, cam, shiftX: 0, shiftY: aspect < 0.8 ? 0.2 : 0.08 };
+  return { ...shot, cam, shiftX: 0, shiftY: aspect < 0.8 ? 0.27 : 0.08 };
 }
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
