@@ -1,0 +1,83 @@
+---
+import { person, profile, domains, parts, alsoExperienced } from '../data/content';
+---
+<section class="skills" id="skills" aria-labelledby="skills-h">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <h2 class="display h2" id="skills-h">Capability map</h2>
+      <p class="lead">Select a skill to trace it to the projects that use it, or a project to see its full stack.</p>
+    </header>
+    <div class="map" id="map">
+      <svg class="traces" id="traces" aria-hidden="true"></svg>
+      <div class="domains">
+        {domains.map((d) => (
+          <div class="domain" data-reveal>
+            <h3 class="h5">{d.title}</h3>
+            <ul>
+              {d.skills.map(([s, p]) => <li><button class="skill" type="button" aria-pressed="false" data-p={p}>{s}</button></li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <ul class="parts" data-reveal>
+        {parts.map((p) => (
+          <li><button class="part" type="button" aria-pressed="false" data-part={p.id} data-href={p.href}>{p.label}</button></li>
+        ))}
+      </ul>
+    </div>
+    <p class="map-status" id="map-status" aria-live="polite">Select a skill or a project to see how they connect.</p>
+    <p class="also"><b>Also experienced with:</b> {alsoExperienced}</p>
+  </div>
+</section>
+
+<section class="profile" id="profile" aria-labelledby="profile-h">
+  <div class="wrap">
+    <h2 class="sr" id="profile-h">Profile</h2>
+    <p class="profile-lede display" data-reveal>{profile.statement[0]}</p>
+    <div class="profile-grid">
+      <div class="profile-text" data-reveal>
+        {profile.statement.slice(1).map((p) => <p>{p}</p>)}
+        <h3 class="h5">Direction</h3>
+        <p>{profile.future}</p>
+      </div>
+      <div class="profile-info" data-reveal>
+        <div>
+          <h3 class="h5">Experience</h3>
+          <ul class="rows">{profile.experience.map(([a, b]) => <li><strong>{a}</strong><span>{b}</span></li>)}</ul>
+        </div>
+        <div>
+          <h3 class="h5">Education</h3>
+          <ul class="rows">{profile.education.map(([a, b]) => <li><strong>{a}</strong><span>{b}</span></li>)}</ul>
+        </div>
+        <div>
+          <h3 class="h5">Languages</h3>
+          <ul class="rows">
+            {profile.languages.map(([a, b, n]) => (
+              <li class="lang">
+                <span><strong>{a}</strong><span>{b}</span></span>
+                <span class="level" role="img" aria-label={`${n} of 4`}>{[1, 2, 3, 4].map((i) => <i class={i <= n ? 'on' : ''}></i>)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="h5">Interests</h3>
+          <ul class="rows">{profile.interests.map((x) => <li><strong>{x}</strong></li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" data-shot="contact" aria-labelledby="contact-h">
+  <div class="wrap contact-in">
+    <h2 class="display h2" id="contact-h">Open to embedded, robotics and IoT engineering roles, and to technical collaboration.</h2>
+    <a class="contact-mail display" href={`mailto:${person.email}`}>{person.email}</a>
+    <div class="contact-actions">
+      <button class="btn" type="button" data-copy={person.email}><span>Copy address</span></button>
+      <a class="btn btn-quiet" href={person.github}>GitHub</a>
+      <button class="btn btn-quiet" type="button" data-print>Save as PDF</button>
+    </div>
+    <p class="contact-loc">{person.location}</p>
+  </div>
+</section>

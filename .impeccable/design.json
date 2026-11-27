@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-27T00:00:00Z",
+  "title": "Design System: D. Uuganbadrakh — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "studio-black": { "role": "neutral", "displayName": "Studio Black" },
+      "graphite-surface": { "role": "neutral", "displayName": "Graphite Surface" },
+      "graphite-surface-raised": { "role": "neutral", "displayName": "Graphite Raised" },
+      "bone": { "role": "neutral", "displayName": "Bone" },
+      "steel-grey": { "role": "neutral", "displayName": "Steel Grey" },
+      "anodized-blue": { "role": "primary", "displayName": "Anodized Blue" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero name only." },
+      "data": { "displayName": "Data", "purpose": "Engineering values: angles, coordinates, lengths." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Reveals and UI transitions (expo out)." },
+      { "name": "t-ui", "value": "220ms", "purpose": "Hover and state changes." },
+      { "name": "reveal", "value": "1200ms, translateY 16px, opacity", "purpose": "Section reveals, once." },
+      { "name": "camera", "value": "exponential damping rate 3.2/s, spherical interpolation", "purpose": "WebGL camera between scroll beats." }
+    ],
+    "breakpoints": [
+      { "name": "narrow", "value": "640px" },
+      { "name": "portrait", "value": "760px or aspect <= 1" },
+      { "name": "nav-collapse", "value": "960px" },
+      { "name": "map-stack", "value": "1100px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button", "kind": "button", "refersTo": "button-primary",
+      "description": "Main action, e.g. Copy address, Run thesis pick sequence.",
+      "html": "<button class=\"ds-btn\">Copy address</button>",
+      "css": ".ds-btn{min-height:44px;padding:0 24px;border:1px solid #F2F2EF;background:#F2F2EF;color:#080A0C;border-radius:2px;font:560 14px 'Geist Variable',system-ui,sans-serif;cursor:pointer;transition:background-color .22s cubic-bezier(.16,1,.3,1)}.ds-btn:hover{background:#fff}"
+    },
+    {
+      "name": "Quiet Button", "kind": "button", "refersTo": "button-quiet",
+      "description": "Secondary action on the dark ground.",
+      "html": "<button class=\"ds-btn-q\">GitHub</button>",
+      "css": ".ds-btn-q{min-height:44px;padding:0 24px;border:1px solid rgba(242,242,239,.17);background:transparent;color:#F2F2EF;border-radius:2px;font:560 14px 'Geist Variable',system-ui,sans-serif;cursor:pointer}.ds-btn-q:hover{background:#161A1E;border-color:#8E949A}"
+    },
+    {
+      "name": "Skill Chip", "kind": "chip", "refersTo": "chip-skill",
+      "description": "Capability-map toggle; fills bone when selected.",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"true\">OpenCV</button>",
+      "css": ".ds-chip{min-height:36px;padding:0 16px;border:1px solid rgba(242,242,239,.17);border-radius:2px;background:#080A0C;color:#F2F2EF;font:400 14px 'Geist Variable',system-ui,sans-serif}.ds-chip[aria-pressed=true]{background:#F2F2EF;color:#080A0C;border-color:#F2F2EF}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The machine is the CV",
+    "overview": "A dark product-photography studio: an original six-axis arm on a fixed WebGL stage, a camera path that tells the story, and calm hairline-ruled editorial sections. One cool accent, light serif display, Geist interface, mono only for data.",
+    "keyCharacteristics": ["Robot-led first viewport", "Anchor-relative orbiting camera", "One accent", "Hairlines instead of cards", "Honest labels on simulations"],
+    "rules": [
+      { "name": "One accent", "body": "Anodized blue only for data, focus and signal flow.", "section": "colors" },
+      { "name": "Mono is for numbers", "body": "Geist Mono only for engineering values.", "section": "typography" },
+      { "name": "Flat surfaces", "body": "Depth from the 3D scene and tone steps, never shadows.", "section": "elevation" }
+    ],
+    "dos": ["Orbit the camera around a named part", "Label simulations and the illustrative model"],
+    "donts": ["Glitch, neon, glass, particles, typewriter text", "Card grids, kickers, side stripes, gradient text"]
+  }
+}

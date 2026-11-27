@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+*.blend1
+.DS_Store
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/config.local.json
+.claude/
